@@ -17,6 +17,11 @@ class User extends CActiveRecord
 	/**
 	 * @return string the associated database table name
 	 */
+    
+        public $kota;
+        
+        public $kecamatan;
+                
 	public function tableName()
 	{
 		return 'user';
@@ -31,6 +36,12 @@ class User extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('hp, password, nama, level', 'required'),
+                        array('hp', 'match', 'pattern'=>'/^([0]{1}+[0-9 ]{8,11})$/', 'message'=>'Nomor Handphone salah'),
+                        array('nama,alamat','length', 'min'=>4, 'tooShort'=>'{attribute} minimal 4 karaketer'),
+                        array('nama', 'match', 'pattern'=>'/^([a-zA-Z  \'\.\,])+$/', 'message'=>'{attribute} tidak boleh menggunakan simbol'),
+                        array('nama','length', 'max'=>32),
+                        array('wilayah_id', 'length', 'max'=>8, 'message'=>'Kode Wilayah Salah'),
+                        array('alamat,kota,kecamatan', 'required', 'on'=>'create'),
 			array('hp', 'length', 'max'=>12),
 			array('password, nama, level', 'length', 'max'=>32),
 			array('wilayah_id', 'length', 'max'=>8),
@@ -65,6 +76,8 @@ class User extends CActiveRecord
 			'wilayah_id' => 'Wilayah',
 			'alamat' => 'Alamat',
 			'level' => 'Level',
+                        'kota' => 'Kota / Kabupaten',
+                        'kecamatan' => 'Kecamatan'
 		);
 	}
 

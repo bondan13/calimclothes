@@ -12,19 +12,17 @@ body
 	margin-top: 5px;
 	margin-bottom: 5px;
 	background: white;
-	border: 1px solid #C9E0ED;
 }
 
 #header
 {
 	margin: 0;
 	padding: 0;
-	border-top: 3px solid #C9E0ED;
 }
 
 #content
 {
-    padding: 20px;
+
 }
 
 #sidebar
@@ -226,4 +224,36 @@ div.search-form
 .operations li a:hover
 {
 	background: #80CFFF;
+}
+
+h4.widget-title {
+    border-bottom: 2px solid #F15A23;
+    padding: 0px 0px 10px;
+    margin: 0px 0px 5px;
+}
+
+ul {
+    float: left;
+    width: calc(100% - 8px);
+    list-style: outside none none;
+}
+
+ul li.cat-item {
+    float: left;
+    width: 100%;
+    padding: 0px;
+    margin: 5px 0 5px 0;
+}
+
+a.sidebars, a.sidebars:visited{
+    color: #515151;
+    text-decoration: none;
+}
+a.sidebars:hover, a.sidebars:active{
+    color: #F66E0B;
+    text-decoration: none;
+}
+
+.sidebar{
+padding-top: 30px;
 }

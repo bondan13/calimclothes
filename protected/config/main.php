@@ -9,7 +9,7 @@ return array(
 	'basePath'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'..',
 	'name'=>'Calim Clothes',
 	'aliases' => array(
-        'bootstrap' => 'ext.bootstrap'
+        'bootstrap' => 'ext.bootstrap',
     ),
 
 	// preloading 'log' component
@@ -18,12 +18,14 @@ return array(
 	// autoloading model and component classes
 	'import'=>array(
 		'application.models.*',
-		'application.components.*',
+		
 		'bootstrap.*',
         'bootstrap.components.*',
         'bootstrap.helpers.*',
         'bootstrap.widgets.*',
         'bootstrap.behaviors.*',
+        'application.helpers.*',
+            'application.components.*',
 	),
 
 	'modules'=>array(
@@ -36,14 +38,24 @@ return array(
 			// If removed, Gii defaults to localhost only. Edit carefully to taste.
 			'ipFilters'=>array('127.0.0.1','::1'),
 		),
+                'admin',
 		
 	),
 
 	// application components
 	'components'=>array(
-        'boostrap' => array(
-            'class'=> 'boostrap.components.BsApi'
-        ),
+            
+                'image'=>array(
+                    'class'=>'application.extensions.image.CImageComponent',
+                      // GD or ImageMagick
+                      'driver'=>'GD',
+                      // ImageMagick setup path
+                      'params'=>array('directory'=>'/opt/local/bin'),
+                ),
+            
+                'boostrap' => array(
+                    'class'=> 'boostrap.components.BsApi'
+                ),
 
 		'user'=>array(
 			// enable cookie-based authentication
@@ -85,6 +97,7 @@ return array(
 				*/
 			),
 		),
+
 
 	),
 

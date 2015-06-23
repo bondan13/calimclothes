@@ -2,7 +2,7 @@
 $baseUrl = Yii::app()->request->baseUrl;
 $cs = Yii::app()->clientScript;
 $cs ->registerCssFile($baseUrl.'/bootstrap/css/bootstrap.css')
-	->registerCssFile($baseUrl.'/bootstrap/css/bootstrap-theme.css')
+	//->registerCssFile($baseUrl.'/bootstrap/css/bootstrap-theme.css')
 	->registerScriptFile($baseUrl . '/bootstrap/js/bootstrap.min.js', CClientScript::POS_END); 
 ?>
 <!DOCTYPE html>
@@ -20,6 +20,7 @@ $cs ->registerCssFile($baseUrl.'/bootstrap/css/bootstrap.css')
 
 	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/main.css">
 	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/form.css">
+        <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/fruitful.css">
 
 	<title><?php echo CHtml::encode($this->pageTitle); ?></title>
 </head>
@@ -29,34 +30,34 @@ $cs ->registerCssFile($baseUrl.'/bootstrap/css/bootstrap.css')
 <div class="container" id="page">
 
 	<div id="header">
-		<div id="logo"><?php echo CHtml::encode(Yii::app()->name); ?></div>
+                    <img src="<?php echo Yii::app()->request->baseUrl; ?>/images/logo.png">
+                    
 	</div><!-- header -->
-
-	<div id="mainmenu">
-		<?php $this->widget('zii.widgets.CMenu',array(
-			'items'=>array(
-				array('label'=>'Home', 'url'=>array('/site/index')),
-				array('label'=>'About', 'url'=>array('/site/page', 'view'=>'about')),
-				array('label'=>'Contact', 'url'=>array('/site/contact')),
-				array('label'=>'Login', 'url'=>array('/site/login'), 'visible'=>Yii::app()->user->isGuest),
-				array('label'=>'Logout ('.Yii::app()->user->name.')', 'url'=>array('/site/logout'), 'visible'=>!Yii::app()->user->isGuest)
-			),
-		)); ?>
-	</div><!-- mainmenu -->
-	<?php if(isset($this->breadcrumbs)):?>
-		<?php $this->widget('zii.widgets.CBreadcrumbs', array(
-			'links'=>$this->breadcrumbs,
-		)); ?><!-- breadcrumbs -->
-	<?php endif?>
-
+        <div class="col-lg-12">
+            <div class="navbar-right">
+                <a href="<?php echo Yii::app()->request->baseUrl; ?>" class="btn btn-default">HOME</a>
+                <a href="#" class="btn btn-default">T SHIRTS</a>
+                <a href="#" class="btn btn-default">SHOES</a>
+                <a href="#" class="btn btn-default">BAGS</a>
+                <a href="#" class="btn btn-default">ACCESORIES</a>
+                <a href="#" class="btn btn-default">SHIRTS & POLO</a>
+                <a href="#" class="btn btn-default">OUTWEARS</a>
+                <a href="#" class="btn btn-default">MERCHANDISES</a> 
+                <a href="#" class="btn btn-default"><i class="glyphicon glyphicon-shopping-cart"></i><sup>1</sup></a>
+            </div>
+            <br/>
+            <hr />
+        </div>
+        
+        <div class="col-lg-12">
+        
 	<?php echo $content; ?>
-
+        </div>
+        
 	<div class="clear"></div>
-
 	<div id="footer">
-		Copyright &copy; <?php echo date('Y'); ?> by My Company.<br/>
+		Copyright &copy; <?php echo date('Y'); ?> by Buntut Kasiran.<br/>
 		All Rights Reserved.<br/>
-		<?php echo Yii::powered(); ?>
 	</div><!-- footer -->
 
 </div><!-- page -->

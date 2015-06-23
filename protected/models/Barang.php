@@ -18,7 +18,8 @@
  */
 class Barang extends CActiveRecord
 {
-	/**
+    public $gambar;
+    /**
 	 * @return string the associated database table name
 	 */
 	public function tableName()
@@ -34,9 +35,11 @@ class Barang extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('nama, berat, kategori_id', 'required'),
+			array('nama, berat, kategori_id, harga, s_stok, m_stok, l_stok, xl_stok, allsize_stok, deskripsi', 'required'),
 			array('s_stok, m_stok, l_stok, xl_stok, allsize_stok, kategori_id', 'numerical', 'integerOnly'=>true),
 			array('berat', 'numerical'),
+                        array('gambar','required', 'on'=>'create,update'),
+                        array('gambar', 'file', 'allowEmpty'=>true, 'types'=>'jpg'),
 			array('nama', 'length', 'max'=>100),
 			array('harga', 'length', 'max'=>11),
 			array('deskripsi', 'safe'),
@@ -71,9 +74,10 @@ class Barang extends CActiveRecord
 			's_stok' => 'S Stok',
 			'm_stok' => 'M Stok',
 			'l_stok' => 'L Stok',
-			'xl_stok' => 'Xl Stok',
+			'xl_stok' => 'XL Stok',
 			'allsize_stok' => 'Allsize Stok',
 			'kategori_id' => 'Kategori',
+                        'gambar' => 'gambar',
 		);
 	}
 
