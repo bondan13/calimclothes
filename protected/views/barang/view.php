@@ -1,36 +1,69 @@
 <?php
-/* @var $this BarangController */
-/* @var $model Barang */
+    Yii::app()->clientScript->registerScript('cilckarea', '
+                    $(document).on("click",".view",function() {
+                      window.location = $(this).find("a").attr("href"); 
+                      return false;
+                    });
 
-$this->breadcrumbs=array(
-	'Barangs'=>array('index'),
-	$model->id,
-);
-
-$this->menu=array(
-	array('label'=>'List Barang', 'url'=>array('index')),
-	array('label'=>'Create Barang', 'url'=>array('create')),
-	array('label'=>'Update Barang', 'url'=>array('update', 'id'=>$model->id)),
-	array('label'=>'Delete Barang', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->id),'confirm'=>'Are you sure you want to delete this item?')),
-	array('label'=>'Manage Barang', 'url'=>array('admin')),
-);
+    ', CClientScript::POS_READY);
 ?>
-
-<h1>View Barang #<?php echo $model->id; ?></h1>
-
-<?php $this->widget('zii.widgets.CDetailView', array(
-	'data'=>$model,
-	'attributes'=>array(
-		'id',
-		'nama',
-		'deskripsi',
-		'harga',
-		'berat',
-		's_stok',
-		'm_stok',
-		'l_stok',
-		'xl_stok',
-		'allsize_stok',
-		'kategori_id',
-	),
-)); ?>
+<div class="row clearfix">
+    <div class="col-lg-4">
+        <?php echo CHtml::image(Yii::app()->request->baseUrl . '/images/default-image-items.jpg', CHtml::encode($model->nama), array('width' => '100%')); ?>
+    </div>
+    <div class="col-lg-8">
+        <h1 id="title">
+            <?php echo $model->nama; ?>
+        </h1>
+        <div class="hargadetail">
+            <?php echo $model->hargaRupiah(); ?>
+        </div>
+        <br /><br />
+        <div class="row clearfix">
+            <div class="col-lg-4">
+                <small>Select Size</small>
+                <?php
+                echo CHtml::dropDownList('listname', 'F', array('s' => 'S --- (stok ' . $model->s_stok . ')',
+                    'm' => 'M --- (stok ' . $model->m_stok . ')',
+                    'l' => 'L --- (stok ' . $model->l_stok . ')',
+                    'xl' => 'XL --- (stok ' . $model->xl_stok . ')',
+                    'az' => 'All Size --- (stok ' . $model->allsize_stok . ')',
+                        ), array('class' => 'form-control'));
+                ?>
+            </div>
+            <div class="col-lg-4">
+                <small>Quantity</small>
+                <input type="text" class="form-control">
+            </div>
+            <div class="col-lg-4">
+                <small></small><br>
+                <button class="btn btn-success btn-block"><i class="glyphicon glyphicon-shopping-cart"></i> Add To Cart</button>
+            </div>
+        </div>
+        <hr>
+        <i class="glyphicon glyphicon-comment"></i>  <b>Description</b>
+        <br />
+        <div class="deskripsi">
+            <?php echo $model->deskripsi; ?>
+        </div>
+        <br />
+    </div>
+</div>
+<br /><br />
+<div class="sidebar">
+    <h4 class="widget-title">
+        Produk Terbaru
+    </h4>
+    <div style="padding-left: 50px; border-bottom: 2px solid #F15A23; height: 250px;">
+        <?php
+        $dataProvider = new CActiveDataProvider('Barang');
+        $dataProvider->pagination->pageSize = 5;
+        $dataProvider->sort->defaultOrder = 'id DESC';
+        $this->widget('zii.widgets.CListView', array(
+            'dataProvider' => $dataProvider,
+            'itemView' => '_view',
+            //'page_size'=>16,
+            'template'=>'{items}',
+        )); ?>
+    </div>
+</div>

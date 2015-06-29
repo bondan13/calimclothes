@@ -26,7 +26,7 @@ class BarangController extends Controller {
     public function accessRules() {
         return array(
             array('allow', // allow all users to perform 'index' and 'view' actions
-                'actions' => array('index', 'view', 'create', 'update', 'admin', 'delete'),
+                'actions' => array('index', 'view', 'create', 'update', 'admin', 'delete', 'kategori','cari'),
                 'users' => array('*'),
             ),
             array('deny', // deny all users
@@ -40,6 +40,7 @@ class BarangController extends Controller {
      * @param integer $id the ID of the model to be displayed
      */
     public function actionView($id) {
+        $this->layout = '//layouts/column1';
         $this->render('view', array(
             'model' => $this->loadModel($id),
         ));
@@ -69,7 +70,7 @@ class BarangController extends Controller {
                         $l = $image->height * 1.2;
                     }
                     $image->crop($l, $t);
-                    $image->resize(216, 180);
+                    $image->resize(432, 360);
                     $image->save(Yii::app()->basePath . '/../images/' . $model->getPrimaryKey() . 's.jpg');
                     
                     $this->redirect(array('view', 'id' => $model->id));
@@ -123,6 +124,8 @@ class BarangController extends Controller {
      */
     public function actionIndex() {
         $dataProvider = new CActiveDataProvider('Barang');
+        $dataProvider->pagination->pageSize = 12;
+        $dataProvider->sort->defaultOrder = 'id DESC';
         $this->render('index', array(
             'dataProvider' => $dataProvider,
         ));
@@ -150,7 +153,7 @@ class BarangController extends Controller {
      * @throws CHttpException
      */
     public function loadModel($id) {
-        $model = Barang::model()->findByPk($id);
+        $model = Barang::model()->with('kategori')->findByPk($id);
         if ($model === null)
             throw new CHttpException(404, 'The requested page does not exist.');
         return $model;
@@ -165,6 +168,30 @@ class BarangController extends Controller {
             echo CActiveForm::validate($model);
             Yii::app()->end();
         }
+    }
+    
+    public function actionKategori($id){
+        $criteria = new CDbCriteria;
+        $criteria->compare('kategori_id', $id);
+        $dataProvider = new CActiveDataProvider('Barang');
+        $dataProvider->criteria = $criteria;
+        $dataProvider->pagination->pageSize = 12;
+        $dataProvider->sort->defaultOrder = 'id DESC';
+        $this->render('index', array(
+            'dataProvider' => $dataProvider,
+        ));
+    }
+    
+    public function actionCari($key){
+        $criteria = new CDbCriteria;
+        $criteria->addCondition('nama LIKE "%' . $key . '%"');
+        $dataProvider = new CActiveDataProvider('Barang');
+        $dataProvider->criteria = $criteria;
+        $dataProvider->pagination->pageSize = 12;
+        $dataProvider->sort->defaultOrder = 'id DESC';
+        $this->render('index', array(
+            'dataProvider' => $dataProvider,
+        ));
     }
 
 }

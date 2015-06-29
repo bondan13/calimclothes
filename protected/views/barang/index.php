@@ -1,20 +1,15 @@
-<?php
-/* @var $this BarangController */
-/* @var $dataProvider CActiveDataProvider */
+<?php 
+    Yii::app()->clientScript->registerScript('cilckarea', '
+                    $(document).on("click",".view",function() {
+                      window.location = $(this).find("a").attr("href"); 
+                      return false;
+                    });
 
-$this->breadcrumbs=array(
-	'Barangs',
-);
+    ', CClientScript::POS_READY);
 
-$this->menu=array(
-	array('label'=>'Create Barang', 'url'=>array('create')),
-	array('label'=>'Manage Barang', 'url'=>array('admin')),
-);
-?>
-
-<h1>Barangs</h1>
-
-<?php $this->widget('zii.widgets.CListView', array(
+$this->widget('zii.widgets.CListView', array(
 	'dataProvider'=>$dataProvider,
 	'itemView'=>'_view',
+        //'page_size'=>16,
+        'template'=>'{summary}{items}<hr><div align="center">{pager}</div>',
 )); ?>

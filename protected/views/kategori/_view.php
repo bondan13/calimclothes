@@ -1,17 +1,1 @@
-<?php
-/* @var $this KategoriController */
-/* @var $data Kategori */
-?>
-
-<div class="view">
-
-	<b><?php echo CHtml::encode($data->getAttributeLabel('id')); ?>:</b>
-	<?php echo CHtml::link(CHtml::encode($data->id), array('view', 'id'=>$data->id)); ?>
-	<br />
-
-	<b><?php echo CHtml::encode($data->getAttributeLabel('nama')); ?>:</b>
-	<?php echo CHtml::encode($data->nama); ?>
-	<br />
-
-
-</div>
+<li class="cat-item cat-item-61"><a  class="sidebars"  href="<?php echo Yii::app()->createUrl('barang/kategori',array('id'=>$data->id)) ?>"><?php echo CHtml::encode($data->nama); ?></a></li>

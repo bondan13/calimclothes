@@ -1,7 +1,5 @@
 <?php
-/* @var $this SiteController */
-
-$this->pageTitle=Yii::app()->name;
+    $this->pageTitle=Yii::app()->name;
 ?>
 <?php echo CHtml::link('Create User',array('user/create'), array('class'=>'btn btn-success')); ?>
 <br /><br />

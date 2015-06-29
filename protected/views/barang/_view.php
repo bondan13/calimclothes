@@ -4,52 +4,14 @@
 ?>
 
 <div class="view">
-
-	<b><?php echo CHtml::encode($data->getAttributeLabel('id')); ?>:</b>
-	<?php echo CHtml::link(CHtml::encode($data->id), array('view', 'id'=>$data->id)); ?>
-	<br />
-
-	<b><?php echo CHtml::encode($data->getAttributeLabel('nama')); ?>:</b>
-	<?php echo CHtml::encode($data->nama); ?>
-	<br />
-
-	<b><?php echo CHtml::encode($data->getAttributeLabel('deskripsi')); ?>:</b>
-	<?php echo CHtml::encode($data->deskripsi); ?>
-	<br />
-
-	<b><?php echo CHtml::encode($data->getAttributeLabel('harga')); ?>:</b>
-	<?php echo CHtml::encode($data->harga); ?>
-	<br />
-
-	<b><?php echo CHtml::encode($data->getAttributeLabel('berat')); ?>:</b>
-	<?php echo CHtml::encode($data->berat); ?>
-	<br />
-
-	<b><?php echo CHtml::encode($data->getAttributeLabel('s_stok')); ?>:</b>
-	<?php echo CHtml::encode($data->s_stok); ?>
-	<br />
-
-	<b><?php echo CHtml::encode($data->getAttributeLabel('m_stok')); ?>:</b>
-	<?php echo CHtml::encode($data->m_stok); ?>
-	<br />
-
-	<?php /*
-	<b><?php echo CHtml::encode($data->getAttributeLabel('l_stok')); ?>:</b>
-	<?php echo CHtml::encode($data->l_stok); ?>
-	<br />
-
-	<b><?php echo CHtml::encode($data->getAttributeLabel('xl_stok')); ?>:</b>
-	<?php echo CHtml::encode($data->xl_stok); ?>
-	<br />
-
-	<b><?php echo CHtml::encode($data->getAttributeLabel('allsize_stok')); ?>:</b>
-	<?php echo CHtml::encode($data->allsize_stok); ?>
-	<br />
-
-	<b><?php echo CHtml::encode($data->getAttributeLabel('kategori_id')); ?>:</b>
-	<?php echo CHtml::encode($data->kategori_id); ?>
-	<br />
-
-	*/ ?>
-
+    <a href="<?php echo Yii::app()->createUrl('barang/view',array('id'=>$data->id)); ?>">
+        <?php echo CHtml::image(Yii::app()->request->baseUrl.'/images/default-image-items.jpg', CHtml::encode($data->nama), array('width'=>'174')); ?>
+    </a>
+    <br />
+    <div class="titlebox">
+        <h3 class="judul"><?php echo CHtml::encode($data->namaSubstr()); ?></h3>
+    </div>
+    <div class="harga"><?php echo CHtml::encode($data->hargaRupiah()); ?></div>
+    <?php //echo $data->kategori->nama; 
+    ?>
 </div>

@@ -1,0 +1,1 @@
+<a href="<?php echo Yii::app()->createUrl('barang/kategori',array('id'=>$data->id)) ?>" class="btn btn-default"><?php echo CHtml::encode($data->nama); ?></a>
