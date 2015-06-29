@@ -2706,3 +2706,71 @@ REQUEST_URI=/calimclothes/
 in D:\www\calimclothes\protected\views\layouts\main.php (98)
 in D:\www\calimclothes\protected\views\layouts\column2.php (48)
 in D:\www\calimclothes\protected\controllers\BarangController.php (131)
+2015/06/29 12:06:59 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "transaksi/order".' in D:\www\yii\framework\web\CWebApplication.php:286
+Stack trace:
+#0 D:\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('transaksi/order')
+#1 D:\www\yii\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#2 D:\www\calimclothes\index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/calimclothes/index.php/transaksi/order
+HTTP_REFERER=http://localhost/calimclothes/index.php/barang/25
+---
+2015/06/29 12:10:52 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "transaksi/order".' in D:\www\yii\framework\web\CWebApplication.php:286
+Stack trace:
+#0 D:\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('transaksi/order')
+#1 D:\www\yii\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#2 D:\www\calimclothes\index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/calimclothes/index.php/transaksi/order
+HTTP_REFERER=http://localhost/calimclothes/index.php/barang/25
+---
+2015/06/29 12:11:01 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "transaksi/order".' in D:\www\yii\framework\web\CWebApplication.php:286
+Stack trace:
+#0 D:\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('transaksi/order')
+#1 D:\www\yii\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#2 D:\www\calimclothes\index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/calimclothes/index.php/transaksi/order
+HTTP_REFERER=http://localhost/calimclothes/index.php/barang/25
+---
+2015/06/29 12:20:36 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "transaksi/order".' in D:\www\yii\framework\web\CWebApplication.php:286
+Stack trace:
+#0 D:\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('transaksi/order')
+#1 D:\www\yii\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#2 D:\www\calimclothes\index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/calimclothes/index.php/transaksi/order
+HTTP_REFERER=http://localhost/calimclothes/index.php/barang/26
+---
+2015/06/29 12:23:39 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "transaksi/order".' in D:\www\yii\framework\web\CWebApplication.php:286
+Stack trace:
+#0 D:\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('transaksi/order')
+#1 D:\www\yii\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#2 D:\www\calimclothes\index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/calimclothes/index.php/transaksi/order
+---
+2015/06/29 12:24:31 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "transaksi/order".' in D:\www\yii\framework\web\CWebApplication.php:286
+Stack trace:
+#0 D:\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('transaksi/order')
+#1 D:\www\yii\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#2 D:\www\calimclothes\index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/calimclothes/index.php/transaksi/order
+---
+2015/06/29 12:24:59 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "transaksi/order".' in D:\www\yii\framework\web\CWebApplication.php:286
+Stack trace:
+#0 D:\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('transaksi/order')
+#1 D:\www\yii\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#2 D:\www\calimclothes\index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/calimclothes/index.php/transaksi/order
+---
+2015/06/29 12:25:21 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "transaksi/order".' in D:\www\yii\framework\web\CWebApplication.php:286
+Stack trace:
+#0 D:\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('transaksi/order')
+#1 D:\www\yii\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#2 D:\www\calimclothes\index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/calimclothes/index.php/transaksi/order
+---

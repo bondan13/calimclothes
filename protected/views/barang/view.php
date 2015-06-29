@@ -20,10 +20,12 @@
         </div>
         <br /><br />
         <div class="row clearfix">
+            <form method="POST" action="<?php echo Yii::app()->createUrl('transaksi/order'); ?>">
+            <input type="hidden" name="id" class="form-control" value="<?php echo $model->id; ?>">
             <div class="col-lg-4">
                 <small>Select Size</small>
                 <?php
-                echo CHtml::dropDownList('listname', 'F', array('s' => 'S --- (stok ' . $model->s_stok . ')',
+                echo CHtml::dropDownList('size', 'F', array('s' => 'S --- (stok ' . $model->s_stok . ')',
                     'm' => 'M --- (stok ' . $model->m_stok . ')',
                     'l' => 'L --- (stok ' . $model->l_stok . ')',
                     'xl' => 'XL --- (stok ' . $model->xl_stok . ')',
@@ -33,12 +35,13 @@
             </div>
             <div class="col-lg-4">
                 <small>Quantity</small>
-                <input type="text" class="form-control">
+                <input type="text" name="qty" class="form-control">
             </div>
             <div class="col-lg-4">
                 <small></small><br>
-                <button class="btn btn-success btn-block"><i class="glyphicon glyphicon-shopping-cart"></i> Add To Cart</button>
+                <button type="submit" class="btn btn-success btn-block"><i class="glyphicon glyphicon-shopping-cart"></i> Add To Cart</button>
             </div>
+            </form>
         </div>
         <hr>
         <i class="glyphicon glyphicon-comment"></i>  <b>Description</b>

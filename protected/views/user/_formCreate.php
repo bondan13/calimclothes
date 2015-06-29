@@ -113,7 +113,7 @@
     </div>
 
     <div class="row buttons">
-        <?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save', array('class'=>'btn btn-success')); ?>
+        <?php echo CHtml::submitButton($model->isNewRecord ? 'Daftar' : 'Save', array('class'=>'btn btn-success')); ?>
     </div>
 
 <?php $this->endWidget(); ?>

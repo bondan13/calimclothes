@@ -11,9 +11,9 @@
 
 
 	<div class="row">
-		<?php echo $form->labelEx($model,'username'); ?>
-		<?php echo $form->textField($model,'username', array('class'=>'form-control')); ?>
-		<?php echo $form->error($model,'username'); ?>
+            <?php echo $form->labelEx($model, 'hp'); ?>
+            <?php echo $form->textField($model, 'hp', array('size' => 12, 'maxlength' => 12, 'class' => 'form-control')); ?>
+            <?php echo $form->error($model, 'hp'); ?>
 	</div>
 
 	<div class="row">
@@ -29,8 +29,21 @@
 	</div>
 
 	<div class="row buttons">
-		<?php echo CHtml::submitButton('Login', array('class'=>'btn btn-primary ')); ?>
-                <?php echo CHtml::submitButton('Register', array('class'=>'btn btn-default navbar-right')); ?>
+		<?php
+                echo CHtml::tag('button', array(
+                    'name' => 'btnSubmit',
+                    'type' => 'submit',
+                    'class' => 'btn btn-success'
+                        ), '<i class="glyphicon glyphicon-new-window"></i> Login'
+                );
+
+                echo CHtml::tag('a', array(
+                    'name' => 'Register',
+                    'href' => Yii::app()->createUrl('user/create'),
+                    'class' => 'btn btn-default navbar-right'
+                        ), '<i class="glyphicon glyphicon-new-window"></i> Register'
+                );
+                ?>
 	</div>
 
 <?php $this->endWidget(); ?>
