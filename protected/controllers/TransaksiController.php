@@ -1,6 +1,6 @@
 <?php
 
-class UserController extends Controller {
+class TransaksiController extends Controller {
 
     /**
      * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
@@ -26,8 +26,8 @@ class UserController extends Controller {
     public function accessRules() {
         return array(
             array('allow', // allow all users to perform 'index' and 'view' actions
-                'actions' => array('index', 'view', 'create', 'update', 'suggestCity','suggestIdWilayah', 'setSelectedKota'),
-                'users' => array('*'),
+                'actions' => array('index', 'view', 'create', 'update', 'delete', 'admin', 'order'),
+                'users' => array('@'),
             ),
             array('deny', // deny all users
                 'users' => array('*'),
@@ -50,19 +50,15 @@ class UserController extends Controller {
      * If creation is successful, the browser will be redirected to the 'view' page.
      */
     public function actionCreate() {
-        $model = new User;
-        $model->setScenario('create');
+        $model = new Transaksi;
+
         // Uncomment the following line if AJAX validation is needed
         // $this->performAjaxValidation($model);
 
-        if (isset($_POST['User'])) {
-            $model->attributes = $_POST['User'];
-            $model->nama = strtoupper($_POST['User']['nama']);
-            $model->level='user';
-            if ($model->validate()) {
-                $model->save();
+        if (isset($_POST['Transaksi'])) {
+            $model->attributes = $_POST['Transaksi'];
+            if ($model->save())
                 $this->redirect(array('view', 'id' => $model->id));
-            }
         }
 
         $this->render('create', array(
@@ -81,8 +77,8 @@ class UserController extends Controller {
         // Uncomment the following line if AJAX validation is needed
         // $this->performAjaxValidation($model);
 
-        if (isset($_POST['User'])) {
-            $model->attributes = $_POST['User'];
+        if (isset($_POST['Transaksi'])) {
+            $model->attributes = $_POST['Transaksi'];
             if ($model->save())
                 $this->redirect(array('view', 'id' => $model->id));
         }
@@ -109,9 +105,23 @@ class UserController extends Controller {
      * Lists all models.
      */
     public function actionIndex() {
-        $dataProvider = new CActiveDataProvider('User');
+        $dataProvider = new CActiveDataProvider('Transaksi');
         $this->render('index', array(
             'dataProvider' => $dataProvider,
+        ));
+    }
+
+    /**
+     * Manages all models.
+     */
+    public function actionAdmin() {
+        $model = new Transaksi('search');
+        $model->unsetAttributes();  // clear any default values
+        if (isset($_GET['Transaksi']))
+            $model->attributes = $_GET['Transaksi'];
+
+        $this->render('admin', array(
+            'model' => $model,
         ));
     }
 
@@ -119,11 +129,11 @@ class UserController extends Controller {
      * Returns the data model based on the primary key given in the GET variable.
      * If the data model is not found, an HTTP exception will be raised.
      * @param integer $id the ID of the model to be loaded
-     * @return User the loaded model
+     * @return Transaksi the loaded model
      * @throws CHttpException
      */
     public function loadModel($id) {
-        $model = User::model()->findByPk($id);
+        $model = Transaksi::model()->findByPk($id);
         if ($model === null)
             throw new CHttpException(404, 'The requested page does not exist.');
         return $model;
@@ -131,62 +141,47 @@ class UserController extends Controller {
 
     /**
      * Performs the AJAX validation.
-     * @param User $model the model to be validated
+     * @param Transaksi $model the model to be validated
      */
     protected function performAjaxValidation($model) {
-        if (isset($_POST['ajax']) && $_POST['ajax'] === 'user-form') {
+        if (isset($_POST['ajax']) && $_POST['ajax'] === 'transaksi-form') {
             echo CActiveForm::validate($model);
             Yii::app()->end();
         }
     }
-    
-    public function actionSuggestCity() {  
-        $criteria = new CDbCriteria;  
-        $criteria->compare('kota_kabupaten', CHtml::encode($_GET['term']), true);  
-        $criteria->distinct=true; 
-        $criteria->select = 'kota_kabupaten';
-        $criteria->limit = 15;  
-        $data = JneTangerang::model()->findAll($criteria);  
-        $arr = array();  
-  
-        foreach ($data as $item) {  
-  
-            $arr[] = array(  
-                'id' => $item->kota_kabupaten,  
-                'value' => $item->kota_kabupaten,  
-                'label' => $item->kota_kabupaten,   
-            );  
-        }  
-  
-        echo CJSON::encode($arr);  
-    } 
 
-    public function actionSuggestIdWilayah(){  
-        $criteria = new CDbCriteria;  
-        $criteria->compare('kecamatan', CHtml::encode($_GET['term']), true);  
-        $criteria->compare('kota_kabupaten', Yii::app()->user->getState('sempak'), true);  
-        $criteria->limit = 15;  
-        $data = JneTangerang::model()->findAll($criteria);  
-  
-        $arr = array();  
-  
-        foreach ($data as $item) {  
-  
-            $arr[] = array(  
-                'id' => $item->id,  
-                'value' => $item->kecamatan,  
-                'label' => $item->kecamatan,  
-            );  
-        }  
-  
-        echo CJSON::encode($arr);  
-    }
+    public function actionOrder() {
+        $model = new Transaksi;
+        $model->setScenario('order');
+        if (isset($_POST['Transaksi'])) {
+            $model->jumlahitem = $_POST['Transaksi']['jumlahitem'];
+            $model->ukuran = $_POST['Transaksi']['ukuran'];
+            $model->barang_id = $_POST['Transaksi']['barang_id'];
+            
+            $barang = Barang::model()->findByPk($model->barang_id);
+            if ($barang === null)
+                {throw new CHttpException(404, 'The requested page does not exist.');}
 
-    public function actionSetSelectedKota()
-    {
-        if (isset($_GET['selected'])){
-            Yii::app()->user->setState('sempak',CHtml::encode($_GET['selected']));
+            $model->jumlah =$model->jumlahitem;
+            $model->berat = $model->jumlahitem * $barang->berat;
+            $model->total_harga = $model->jumlahitem * $barang->harga;
+            $model->size = strtoupper($model->ukuran);
+            $model->user_id = Yii::app()->user->id; 
+            $model->tanggal = new CDbExpression('NOW()');
+            $model->status = 0;
+            $model->save();
+            $transaksiBefore = Transaksi::model()->findByAttributes(array('user_id'=>$model->user_id),'status=0');
+            if ($transaksiBefore === null){
+               $model->invoice_id = 'T'.$model->id;
             }
+            else {
+                $model->invoice_id = 'T'.$transaksiBefore->id;
+            }
+            $model->save();
+            $this->redirect(array('view', 'id' => $model->id));
+        }
+        else {
+            $this->redirect(array('index'));}
     }
 
 }

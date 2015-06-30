@@ -21,11 +21,11 @@
         <br /><br />
         <div class="row clearfix">
             <form method="POST" action="<?php echo Yii::app()->createUrl('transaksi/order'); ?>">
-            <input type="hidden" name="id" class="form-control" value="<?php echo $model->id; ?>">
+            <input type="hidden" name="Transaksi[barang_id]" class="form-control" value="<?php echo $model->id; ?>">
             <div class="col-lg-4">
                 <small>Select Size</small>
                 <?php
-                echo CHtml::dropDownList('size', 'F', array('s' => 'S --- (stok ' . $model->s_stok . ')',
+                echo CHtml::dropDownList('Transaksi[ukuran]', 'F', array('s' => 'S --- (stok ' . $model->s_stok . ')',
                     'm' => 'M --- (stok ' . $model->m_stok . ')',
                     'l' => 'L --- (stok ' . $model->l_stok . ')',
                     'xl' => 'XL --- (stok ' . $model->xl_stok . ')',
@@ -35,7 +35,7 @@
             </div>
             <div class="col-lg-4">
                 <small>Quantity</small>
-                <input type="text" name="qty" class="form-control">
+                <input type="text" name="Transaksi[jumlahitem]" class="form-control">
             </div>
             <div class="col-lg-4">
                 <small></small><br>
