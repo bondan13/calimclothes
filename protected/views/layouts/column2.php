@@ -4,6 +4,17 @@
 <div class="row clearfix">
     
     <div class="col-lg-3">
+        <?php if (!Yii::app()->user->isGuest) { ?>
+         <div class="sidebar">
+            <h4 class="widget-title">
+                <?php echo strtoupper(Yii::app()->user->getState('nama',null)); ?>
+            </h4>
+             
+            <a href="<?php echo Yii::app()->createUrl('site/logout'); ?>">LOG OUT</a>
+            <br />
+            <br />
+        </div>
+        <?php } ?>
         <div class="sidebar">
             <h4 class="widget-title">
                 Product Categories

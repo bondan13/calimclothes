@@ -45,7 +45,8 @@
         <?php echo $form->labelEx($model, 'kota');
         $this->widget('zii.widgets.jui.CJuiAutoComplete', array(
             'value' => '', //Sumber dari tabel Relasi Kota 
-            'name' => "kota",
+            'model'=>$model,
+            'attribute'=>'kota',
             'id' => '01',
             'source' => $this->createUrl('user/suggestcity'), // url untuk mengambil daftar city  
             // additional javascript options for the autocomplete plugin  
@@ -80,12 +81,13 @@
     </div>
     
     <div class="row">
-         <?php echo $form->labelEx($model, 'kecamatan'); ?>
+        <?php echo $form->labelEx($model, 'kecamatan'); ?>
         <?php
            $this->widget('zii.widgets.jui.CJuiAutoComplete', array(  
            'value' => '', //Sumber dari tabel Relasi Kota 
-           'name'=>"kecamatan",
-                           'id'=>'02',	
+           'model'=>$model,
+           'attribute'=>'kecamatan',
+           'id'=>'02',	
            'source'=>$this->createUrl('user/suggestIdWilayah'), // url untuk mengambil daftar city  
            // additional javascript options for the autocomplete plugin  
            'options'=>array(  
@@ -96,14 +98,12 @@
                                                      .val(ui.item.id);
                                                     $("#02")
                                                      .val(ui.item.value);
-                                                    $("#02")
-                                                     .attr("disabled","disabled");
                                                      return false;
                                                     }',
            ),  
                            'htmlOptions'=>array(
                                    'class'=>'form-control',
-                                   'disabled'=>'disabled',
+                                   
                            ),
            )); 
         ?>
