@@ -40,8 +40,19 @@ class TransaksiController extends Controller {
      * @param integer $id the ID of the model to be displayed
      */
     public function actionView($id) {
+        
+        $model = Transaksi::model()->findByAttributes(
+            array('id'=>$id),
+            array(
+                'condition'=>'user_id=:user_id', 
+                'params'=>array(':user_id'=>Yii::app()->user->id)
+            )
+        );
+        if ($model === null)
+            throw new CHttpException(404, 'The requested page does not exist.');
+        
         $this->render('view', array(
-            'model' => $this->loadModel($id),
+            'model' => $model,
         ));
     }
 
@@ -161,8 +172,64 @@ class TransaksiController extends Controller {
             $barang = Barang::model()->findByPk($model->barang_id);
             if ($barang === null)
                 {throw new CHttpException(404, 'The requested page does not exist.');}
+            
+                
+            if ($model->jumlahitem <1) Yii::app()->user->setFlash('error', 'Minimal pembelian 1');
+            
+            if ($model->ukuran=='s'){
+                if ($model->jumlahitem <= $barang->s_stok){
+                    $model->jumlah = $model->jumlahitem;
+                    $barang->s_stok = ($barang->s_stok - $model->jumlahitem) ;
+                }
+                else{
+                    Yii::app()->user->setFlash('error', 'Size S hanya tersedia '.$barang->s_stok);
+                }
+            }
+            
+            if ($model->ukuran=='m'){
+                if ($model->jumlahitem <= $barang->m_stok){
+                    $model->jumlah =$model->jumlahitem;
+                    $barang->m_stok = ($barang->m_stok - $model->jumlahitem) ;
+                }
+                else{
+                    Yii::app()->user->setFlash('error', 'Size M hanya tersedia '.$barang->m_stok);
+                }
+            }
+            if ($model->ukuran=='l'){
+                if ($model->jumlahitem <= $barang->l_stok){
+                    $model->jumlah =$model->jumlahitem;
+                    $barang->l_stok = ($barang->l_stok - $model->jumlahitem) ;
+                }
+                else{
+                    Yii::app()->user->setFlash('error', 'Size L hanya tersedia '.$barang->l_stok);
+                }
+            }
+            if ($model->ukuran=='xl'){
+                if ($model->jumlahitem <= $barang->xl_stok){
+                    $model->jumlah =$model->jumlahitem;
+                    $barang->xl_stok = ($barang->xl_stok - $model->jumlahitem) ;
+                }
+                else{
+                    Yii::app()->user->setFlash('error', 'Size XL hanya tersedia '.$barang->xl_stok);
+                }
+            }
 
-            $model->jumlah =$model->jumlahitem;
+            if ($model->ukuran=='az'){
+                if ($model->jumlahitem <= $barang->allsize_stok){
+                    $model->jumlah =$model->jumlahitem;
+                    $barang->allsize_stok = ($barang->allsize_stok - $model->jumlahitem) ;
+                }
+                else{
+                    Yii::app()->user->setFlash('error', 'All Size hanya tersedia '.$barang->allsize_stok);
+                }
+            }
+            
+            if(Yii::app()->user->hasFlash('error')){
+                $this->redirect(array('barang/view', 'id' => $barang->id));
+                Yii::app()->end();
+            }
+            
+            $barang->save();
             $model->berat = $model->jumlahitem * $barang->berat;
             $model->total_harga = $model->jumlahitem * $barang->harga;
             $model->size = strtoupper($model->ukuran);
@@ -178,6 +245,7 @@ class TransaksiController extends Controller {
                 $model->invoice_id = 'T'.$transaksiBefore->id;
             }
             $model->save();
+            
             $this->redirect(array('view', 'id' => $model->id));
         }
         else {

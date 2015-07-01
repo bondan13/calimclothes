@@ -17,9 +17,14 @@
         </h1>
         <div class="hargadetail">
             <?php echo $model->hargaRupiah(); ?>
+            <br /><br />
+            <?php if (Yii::app()->user->hasFlash('error')){ ?>
+            <span class="label label-danger"><?php echo Yii::app()->user->getFlash('error'); ?></span>
+            <?php } ?>
         </div>
-        <br /><br />
+        
         <div class="row clearfix">
+            
             <form method="POST" action="<?php echo Yii::app()->createUrl('transaksi/order'); ?>">
             <input type="hidden" name="Transaksi[barang_id]" class="form-control" value="<?php echo $model->id; ?>">
             <div class="col-lg-4">
