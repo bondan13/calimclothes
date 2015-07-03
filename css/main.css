@@ -299,3 +299,9 @@ h1#title{
 .deskripsi{
     color :#515151;
 }
+
+div.transaksiall:hover{
+    box-shadow: 0px 0px 5px 0px #CCC;
+    padding: 12px;
+    cursor: pointer;
+}

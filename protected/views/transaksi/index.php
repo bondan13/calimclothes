@@ -1,20 +1,15 @@
-<?php
-/* @var $this TransaksiController */
-/* @var $dataProvider CActiveDataProvider */
+<h3>Pembelian</h3>
 
-$this->breadcrumbs=array(
-	'Transaksis',
-);
+<?php 
+    Yii::app()->clientScript->registerScript('transaksiall', '
+                    $(document).on("click",".transaksiall",function() {
+                      window.location = $(this).find("a").attr("href"); 
+                      return false;
+                    });
 
-$this->menu=array(
-	array('label'=>'Create Transaksi', 'url'=>array('create')),
-	array('label'=>'Manage Transaksi', 'url'=>array('admin')),
-);
-?>
-
-<h1>Transaksis</h1>
-
-<?php $this->widget('zii.widgets.CListView', array(
+    ', CClientScript::POS_READY);
+    
+$this->widget('zii.widgets.CListView', array(
 	'dataProvider'=>$dataProvider,
 	'itemView'=>'_view',
 )); ?>

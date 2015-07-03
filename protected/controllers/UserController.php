@@ -26,7 +26,7 @@ class UserController extends Controller {
     public function accessRules() {
         return array(
             array('allow', // allow all users to perform 'index' and 'view' actions
-                'actions' => array('index', 'view', 'create', 'update', 'suggestCity','suggestIdWilayah', 'setSelectedKota'),
+                'actions' => array('index', 'view', 'create', 'update', 'suggestCity','suggestIdWilayah', 'setSelectedKota', 'profile'),
                 'users' => array('*'),
             ),
             array('deny', // deny all users
@@ -85,6 +85,29 @@ class UserController extends Controller {
             $model->attributes = $_POST['User'];
             if ($model->save())
                 $this->redirect(array('view', 'id' => $model->id));
+        }
+
+        $this->render('update', array(
+            'model' => $model,
+        ));
+    }
+    
+    public function actionProfile($id) {
+        if ($id != Yii::app()->user->id){
+            $this->redirect(array('profile', 'id' => Yii::app()->user->id));
+        }
+        
+        $model = $this->loadModel($id);
+
+        // Uncomment the following line if AJAX validation is needed
+        // $this->performAjaxValidation($model);
+
+        if (isset($_POST['User'])) {
+            $model->attributes = $_POST['User'];
+            if ($model->save()){
+                Yii::app()->user->setFlash('save', 'Update Sukses');
+                $this->redirect(array('profile', 'id' => $model->id));
+            }
         }
 
         $this->render('update', array(

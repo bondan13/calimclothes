@@ -56,6 +56,8 @@ class Transaksi extends CActiveRecord {
         // NOTE: you may need to adjust the relation name and the related
         // class name for the relations automatically generated below.
         return array(
+            'user' => array(self::BELONGS_TO, 'User', 'user_id'),
+            'barang' => array(self::BELONGS_TO, 'Barang', 'barang_id'),
         );
     }
 
@@ -65,7 +67,7 @@ class Transaksi extends CActiveRecord {
     public function attributeLabels() {
         return array(
             'id' => 'ID',
-            'invoice_id' => 'Invoice',
+            'invoice_id' => 'NO Invoice',
             'user_id' => 'User',
             'barang_id' => 'Barang',
             'jumlah' => 'Jumlah',
@@ -123,5 +125,36 @@ class Transaksi extends CActiveRecord {
     public static function model($className = __CLASS__) {
         return parent::model($className);
     }
+    
+    public function status(){
+        if ($this->status == 0){
+            echo "Pesan";
+        }
+        else if ($this->status == 1){
+            echo "Konfirmasi Pembayaran";
+        }
+        else if ($this->status == 2){
+            echo "Pembayaran Behasil";
+        }
+        else if ($this->status == 3){
+            echo "Pembayaran Gagal";
+        }
+        else if ($this->status == 4){
+            echo "Pengiriman";
+        }
+        else if ($this->status == 5){
+            echo "Transaksi selesai";
+        }
+        else {
+            echo "Status tidak ditemukan";
+        }
+        
+    }
+    
+    public function totalHarga(){
+        $harga = number_format($this->total_harga,0,',','.');
+        return 'Rp '.$harga;
+    }
+    
 
 }

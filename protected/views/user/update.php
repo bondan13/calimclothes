@@ -1,21 +1,9 @@
-<?php
-/* @var $this UserController */
-/* @var $model User */
+<h3>Profile</h3>
+<?php if (Yii::app()->user->hasFlash('save')) { ?>
+<div class="alert alert-success alert-dismissible" role="alert">
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+  <?php echo Yii::app()->user->getFlash('save'); ?>
+</div>
+<?php } ?>
 
-$this->breadcrumbs=array(
-	'Users'=>array('index'),
-	$model->id=>array('view','id'=>$model->id),
-	'Update',
-);
-
-$this->menu=array(
-	array('label'=>'List User', 'url'=>array('index')),
-	array('label'=>'Create User', 'url'=>array('create')),
-	array('label'=>'View User', 'url'=>array('view', 'id'=>$model->id)),
-	array('label'=>'Manage User', 'url'=>array('admin')),
-);
-?>
-
-<h1>Update User <?php echo $model->id; ?></h1>
-
-<?php $this->renderPartial('_form', array('model'=>$model)); ?>
+<?php $this->renderPartial('_formUpdate', array('model'=>$model)); ?>

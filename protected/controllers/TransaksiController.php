@@ -26,7 +26,7 @@ class TransaksiController extends Controller {
     public function accessRules() {
         return array(
             array('allow', // allow all users to perform 'index' and 'view' actions
-                'actions' => array('index', 'view', 'create', 'update', 'delete', 'admin', 'order'),
+                'actions' => array('index', 'view', 'create', 'update', 'delete', 'admin', 'order', 'invoice'),
                 'users' => array('@'),
             ),
             array('deny', // deny all users
@@ -116,7 +116,11 @@ class TransaksiController extends Controller {
      * Lists all models.
      */
     public function actionIndex() {
+        $criteria = new CDbCriteria;
+        $criteria->compare('user_id', Yii::app()->user->id);
         $dataProvider = new CActiveDataProvider('Transaksi');
+        $dataProvider->criteria = $criteria ;
+        $dataProvider->sort->defaultOrder = 'id DESC';
         $this->render('index', array(
             'dataProvider' => $dataProvider,
         ));
@@ -246,10 +250,87 @@ class TransaksiController extends Controller {
             }
             $model->save();
             
-            $this->redirect(array('view', 'id' => $model->id));
+            $this->redirect(array('/transaksi'));
         }
         else {
             $this->redirect(array('index'));}
+    }
+    
+    public function actionInvoice($id){
+        $invoice = Transaksi::model()->findByAttributes(
+                array('user_id'=>Yii::app()->user->id, 'invoice_id'=>$id)
+            );
+        if ($invoice===null){
+            $this->redirect(array('/'));
+            Yii::app()->end();
+        }
+        
+        if ($invoice->user_id != Yii::app()->user->id){
+            $this->redirect(array('/'));
+            Yii::app()->end();
+        }
+        
+        if (isset($_POST['invoice_id'])){
+            Yii::app()->db->createCommand()->update(
+                        'transaksi', array('status' => 1), 'invoice_id = :id', array(':id' => $invoice->invoice_id)
+                );
+            $this->redirect(array('transaksi/invoice', 'id' => $invoice->invoice_id));            
+        }
+        
+        $criteria = new CDbCriteria();
+        $criteria->compare('invoice_id', $id);
+        $criteria->compare('user_id', Yii::app()->user->id);
+        
+        $criteria1 = new CDbCriteria();
+        $criteria1->compare('invoice_id', $id);
+        $criteria1->compare('user_id', Yii::app()->user->id);
+        $criteria1->select = 'sum(jumlah) AS jumlahCount';
+        
+        $this->layout = '//layouts/column1';
+        $model = new CActiveDataProvider('Transaksi');
+        $model->criteria = $criteria;
+        $model->pagination = false ;
+        
+        $command=Yii::app()->db->createCommand();
+        $command->select('SUM(jumlah) AS sum');
+        $command->from('transaksi');
+        $command->where('invoice_id=:id', array(':id'=>$id));
+        
+        $command1=Yii::app()->db->createCommand();
+        $command1->select('SUM(total_harga) AS sum');
+        $command1->from('transaksi');
+        $command1->where('invoice_id=:id', array(':id'=>$id));
+        $totalharga = $this->hargaRupiah($command1->queryScalar());
+        
+        $command2=Yii::app()->db->createCommand();
+        $command2->select('SUM(berat) AS sum');
+        $command2->from('transaksi');
+        $command2->where('invoice_id=:id', array(':id'=>$id));
+        $berat =  $command2->queryScalar();
+        
+        $user = User::model()->findByPk(Yii::app()->user->id);
+        $ongkir = JneTangerang::model()->findByPk($user->wilayah_id);
+        $totalongkir = ceil($berat) * $ongkir->tarif_reg;
+        
+        $total = $command1->queryScalar() + $totalongkir ; 
+        
+
+        $this->render('invoice', array(
+            'invoice' => $invoice, 'dataprovider'=>$model, 
+            'totalitem'=> $command->queryScalar(), 
+            'totalharga'=>$totalharga, 
+            'totalberat'=>$berat,
+            'totalongkir'=>$this->hargaRupiah($totalongkir),
+            'total'=> $this->hargaRupiah($total),
+            'user'=>$user,
+            'wilayah'=>$ongkir,
+        ));
+        
+    }
+    
+    private function hargaRupiah($harga){
+        $harga = number_format($harga,0,',','.');
+        return 'Rp '.$harga;
     }
 
 }

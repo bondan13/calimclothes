@@ -31,7 +31,7 @@ class User extends CActiveRecord {
         // NOTE: you should only define rules for those attributes that
         // will receive user inputs.
         return array(
-            array('hp, password, nama, level', 'required'),
+            array('hp, password, nama, level, wilayah_id', 'required'),
             array('hp', 'match', 'pattern' => '/^([0]{1}+[0-9 ]{8,11})$/', 'message' => 'Nomor Handphone salah'),
             array('nama,alamat', 'length', 'min' => 4, 'tooShort' => '{attribute} minimal 4 karaketer'),
             array('nama', 'match', 'pattern' => '/^([a-zA-Z  \'\.\,])+$/', 'message' => '{attribute} tidak boleh menggunakan simbol'),
@@ -55,6 +55,7 @@ class User extends CActiveRecord {
         // NOTE: you may need to adjust the relation name and the related
         // class name for the relations automatically generated below.
         return array(
+            'wilayah'=>array(self::BELONGS_TO, 'JneTangerang', 'wilayah_id')
         );
     }
 

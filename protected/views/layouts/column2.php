@@ -9,9 +9,10 @@
             <h4 class="widget-title">
                 <?php echo strtoupper(Yii::app()->user->getState('nama',null)); ?>
             </h4>
-             
-            <a href="<?php echo Yii::app()->createUrl('site/logout'); ?>">LOG OUT</a>
-            <br />
+             <br />
+            <a href="<?php echo Yii::app()->createUrl('user/profile',array('id'=>Yii::app()->user->id)); ?>" class="btn btn-default btn-block"><i class="glyphicon glyphicon-user"></i> PROFIL</a>
+            <a href="<?php echo Yii::app()->createUrl('transaksi'); ?>" class="btn btn-default btn-block"><i class="glyphicon glyphicon-shopping-cart"></i><sup><?php echo Transaksi::model()->countByAttributes(array('status'=>'pesan','user_id'=>Yii::app()->user->id)); ?></sup> PESANAN</a>
+            <a class="btn btn-default btn-block" href="<?php echo Yii::app()->createUrl('site/logout'); ?>"> <i class="glyphicon glyphicon-log-out"></i> LOGOUT</a>
             <br />
         </div>
         <?php } ?>

@@ -58,8 +58,9 @@ return array(
             'rules' => array(
                 '<controller:\w+>/<id:\d+>' => '<controller>/view',
                 '<controller:\w+>/<action:\w+>/<id:\d+>' => '<controller>/<action>',
-                '<controller:\w+>/<action:\w+>/<key:\w+>' => 'barang/cari',
                 '<controller:\w+>/<action:\w+>' => '<controller>/<action>',
+                '<controller:barang>/<action:cari>/<key:\w+>' => 'barang/cari',
+                '<controller:transaksi>/<action:invoice>/<id:\w+>' => 'transaksi/invoice',
             ),
         ),
         // database settings are configured in database.php
