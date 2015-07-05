@@ -26,7 +26,7 @@ class UserController extends Controller {
     public function accessRules() {
         return array(
             array('allow', // allow all users to perform 'index' and 'view' actions
-                'actions' => array('index', 'view', 'create', 'update', 'suggestCity','suggestIdWilayah', 'setSelectedKota', 'profile'),
+                'actions' => array('index', 'admin', 'view', 'create', 'update', 'suggestCity','suggestIdWilayah', 'setSelectedKota', 'profile'),
                 'users' => array('*'),
             ),
             array('deny', // deny all users
@@ -76,6 +76,10 @@ class UserController extends Controller {
      * @param integer $id the ID of the model to be updated
      */
     public function actionUpdate($id) {
+        if (Yii::app()->user->getState('level') != 'admin'){
+            $this->redirect(array('/'));
+        }
+        
         $model = $this->loadModel($id);
 
         // Uncomment the following line if AJAX validation is needed
@@ -87,11 +91,20 @@ class UserController extends Controller {
                 $this->redirect(array('view', 'id' => $model->id));
         }
 
-        $this->render('update', array(
+        $this->render('updateadmin', array(
             'model' => $model,
         ));
     }
-    
+    public function actionAdmin() {
+        $model = new User('search');
+        $model->unsetAttributes();  // clear any default values
+        if (isset($_GET['User']))
+            $model->attributes = $_GET['User'];
+
+        $this->render('admin', array(
+            'model' => $model,
+        ));
+    }
     public function actionProfile($id) {
         if ($id != Yii::app()->user->id){
             $this->redirect(array('profile', 'id' => Yii::app()->user->id));

@@ -5,7 +5,7 @@
 
 <div class="view">
     <a href="<?php echo Yii::app()->createUrl('barang/view',array('id'=>$data->id)); ?>">
-        <?php echo CHtml::image(Yii::app()->request->baseUrl.'/images/default-image-items.jpg', CHtml::encode($data->nama), array('width'=>'174')); ?>
+        <?php echo CHtml::image(Yii::app()->request->baseUrl.'/images/'.$data->id.'s.jpg', CHtml::encode($data->nama), array('width'=>'174')); ?>
     </a>
     <br />
     <div class="titlebox">

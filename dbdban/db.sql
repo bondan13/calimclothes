@@ -39,7 +39,7 @@ CREATE TABLE `barang` (
   `gambar` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `id_UNIQUE` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -48,7 +48,7 @@ CREATE TABLE `barang` (
 
 LOCK TABLES `barang` WRITE;
 /*!40000 ALTER TABLE `barang` DISABLE KEYS */;
-INSERT INTO `barang` VALUES (6,'asdsad','But this fails to work correctly, because if i click next, and the list end\'s, somehow, the ajax code does not reinitialize the url that is being send, it keeps on to concat with the old url until the url gets so big that the app crashes.',1,1,0,0,0,0,0,5,'asd'),(7,'asdsd','But this fails to work correctly, because if i click next, and the list end\'s, somehow, the ajax code does not reinitialize the url that is being send, it keeps on to concat with the old url until the url gets so big that the app crashes.',1,1,0,0,0,0,0,5,'asd'),(8,'qweqw','But this fails to work correctly, because if i click next, and the list end\'s, somehow, the ajax code does not reinitialize the url that is being send, it keeps on to concat with the old url until the url gets so big that the app crashes.',1,1,0,0,0,0,0,5,'asd'),(9,'asdas','But this fails to work correctly, because if i click next, and the list end\'s, somehow, the ajax code does not reinitialize the url that is being send, it keeps on to concat with the old url until the url gets so big that the app crashes.',1,1,0,0,0,0,0,5,'asd'),(10,'asdasaa','But this fails to work correctly, because if i click next, and the list end\'s, somehow, the ajax code does not reinitialize the url that is being send, it keeps on to concat with the old url until the url gets so big that the app crashes.',1,1,0,0,0,0,0,7,'asd'),(11,'asd','But this fails to work correctly, because if i click next, and the list end\'s, somehow, the ajax code does not reinitialize the url that is being send, it keeps on to concat with the old url until the url gets so big that the app crashes.',1,1,0,0,0,0,0,5,'asd'),(12,'asd','But this fails to work correctly, because if i click next, and the list end\'s, somehow, the ajax code does not reinitialize the url that is being send, it keeps on to concat with the old url until the url gets so big that the app crashes.',1,1,0,0,0,0,0,5,'asd'),(13,'sad','But this fails to work correctly, because if i click next, and the list end\'s, somehow, the ajax code does not reinitialize the url that is being send, it keeps on to concat with the old url until the url gets so big that the app crashes.',1,1,0,0,0,0,0,5,'asd'),(14,'sad','But this fails to work correctly, because if i click next, and the list end\'s, somehow, the ajax code does not reinitialize the url that is being send, it keeps on to concat with the old url until the url gets so big that the app crashes.',1,1,0,0,0,0,0,5,'asd'),(15,'asdasd','asdas',1,1,0,0,0,0,0,5,'asd'),(16,'dsadasdas','sad',1,1,0,0,0,0,0,5,'asd'),(17,'sadas','asd',1,1,0,0,0,0,0,5,'asd'),(18,'asdas','sadsad',1231,1,0,0,0,0,0,5,'asd'),(19,'asd','sad',213,1,0,0,0,0,0,5,'asd'),(20,'sadasd','sadas',4294967295,1,0,0,0,0,0,5,'asd'),(21,'asdsad','asdsa',1312312,1,0,0,0,0,0,5,'asd'),(22,'asdasd','asd',1,1,0,0,0,0,0,2,'asd'),(23,'sad','sad',1,1.2,0,0,0,0,0,2,'asd'),(24,'asdsa','asda',1,1,0,0,0,0,0,7,'asd'),(25,'asdasd','asdas',2131,1,0,0,0,0,0,5,'asd'),(26,'kenapa why selalu always tidak pernah never','1212',213123,11,0,0,0,0,0,5,'asd'),(27,'baru ini dia aduh','sada',21312,1,0,0,0,0,0,5,'asd'),(28,'Jhonny Mate Jhonny Mate Jhonny Mate','dasd',1000000,1,0,0,0,0,0,5,'asd'),(29,'Somewhat Key Somewhat Key','213123',123123123,1,0,3,4,1,5,5,NULL);
+INSERT INTO `barang` VALUES (32,'T-Shirt Moose TC250 Plane L','T-Shirt Moose TC250 Plane L\r\nSKU: T-Shirt Moose TC250 Plane L. Category: T Shirt. Tags: bloop endorse, kaos distro, kaos moose, moose beliver, T-Shirt Moose TC250 Plane L, tendencies, urbie. ',120000,0.3,12,2,12,2,0,8,'TC250-plane-120-L.jpg');
 /*!40000 ALTER TABLE `barang` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -134,7 +134,7 @@ CREATE TABLE `transaksi` (
   `keterangan` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `id_UNIQUE` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -143,7 +143,6 @@ CREATE TABLE `transaksi` (
 
 LOCK TABLES `transaksi` WRITE;
 /*!40000 ALTER TABLE `transaksi` DISABLE KEYS */;
-INSERT INTO `transaksi` VALUES (13,'T13',1,28,2,2,2000000,0,NULL,NULL,'2015-06-30 13:54:38',NULL,'S',NULL),(14,'T13',1,29,0,0,0,0,NULL,NULL,'2015-07-01 10:33:03',NULL,'S',NULL),(15,'T13',1,29,1,1,123123123,0,NULL,NULL,'2015-07-01 10:47:14',NULL,'S',NULL),(16,'T13',1,29,1,1,123123123,0,NULL,NULL,'2015-07-01 10:47:28',NULL,'M',NULL),(17,'T13',1,29,2,2,246246246,0,NULL,NULL,'2015-07-01 10:47:49',NULL,'L',NULL),(18,'T13',1,29,1,1,123123123,0,NULL,NULL,'2015-07-01 10:52:36',NULL,'S',NULL),(19,'T13',1,29,2,2,246246246,0,NULL,NULL,'2015-07-01 10:52:48',NULL,'M',NULL),(20,'T13',1,29,1,1,123123123,0,NULL,NULL,'2015-07-01 10:53:58',NULL,'S',NULL),(21,'T13',1,29,2,2,246246246,0,NULL,NULL,'2015-07-01 10:54:08',NULL,'S',NULL),(22,'T13',1,29,2,2,246246246,0,NULL,NULL,'2015-07-01 11:02:16',NULL,'S',NULL),(23,'T13',1,29,1,1,123123123,0,NULL,NULL,'2015-07-01 11:36:28',NULL,'M',NULL);
 /*!40000 ALTER TABLE `transaksi` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -164,7 +163,7 @@ CREATE TABLE `user` (
   `level` varchar(32) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `hp_UNIQUE` (`hp`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -173,7 +172,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,'011111111111','boja.FOUpq2/2','bondan','MES22600','tangerang','user');
+INSERT INTO `user` VALUES (1,'011111111111','boja.FOUpq2/2','Ez','CGK10000','Kamurang Atas, Pakualam','admin'),(2,'022222222222','boja.FOUpq2/2','Alias','TGR10049','Kebon nanas','user');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -186,4 +185,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-07-01 18:53:39
+-- Dump completed on 2015-07-05 11:55:13

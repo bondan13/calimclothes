@@ -9,7 +9,7 @@
 ?>
 <div class="row clearfix">
     <div class="col-lg-4">
-        <?php echo CHtml::image(Yii::app()->request->baseUrl . '/images/default-image-items.jpg', CHtml::encode($model->nama), array('width' => '100%')); ?>
+        <?php echo CHtml::image(Yii::app()->request->baseUrl . '/images/'.$model->id.'s.jpg', CHtml::encode($model->nama), array('width' => '100%')); ?>
     </div>
     <div class="col-lg-8">
         <h1 id="title">

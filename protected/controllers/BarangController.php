@@ -26,7 +26,7 @@ class BarangController extends Controller {
     public function accessRules() {
         return array(
             array('allow', // allow all users to perform 'index' and 'view' actions
-                'actions' => array('index', 'view', 'create', 'update', 'admin', 'delete', 'kategori','cari'),
+                'actions' => array('index', 'view', 'create', 'update', 'admin', 'delete', 'kategori', 'cari', 'updategambar'),
                 'users' => array('*'),
             ),
             array('deny', // deny all users
@@ -57,26 +57,24 @@ class BarangController extends Controller {
         // $this->performAjaxValidation($model);
         if (isset($_POST['Barang'])) {
             $model->attributes = $_POST['Barang'];
-            $model->gambar=CUploadedFile::getInstance($model,'gambar');
-            if ($model->validate()){
-                    $model->save();
-                    $model->gambar->saveAs(Yii::app()->basePath.'/../images/'.$model->getPrimaryKey().'.jpg'); 
-                    $image = Yii::app()->image->load(Yii::app()->basePath.'/../images/'.$model->getPrimaryKey().'.jpg');
-                    $image = new Image('images/'.$model->getPrimaryKey().'.jpg');
-                    $t = $image->width / 1.2;
-                    $l = $image->width;
-                    if (($image->height * 1.2) < $image->width) {
-                        $t = $image->height;
-                        $l = $image->height * 1.2;
-                    }
-                    $image->crop($l, $t);
-                    $image->resize(432, 360);
-                    $image->save(Yii::app()->basePath . '/../images/' . $model->getPrimaryKey() . 's.jpg');
-                    
-                    $this->redirect(array('view', 'id' => $model->id));
+            $model->gambar = CUploadedFile::getInstance($model, 'gambar');
+            if ($model->validate()) {
+                $model->save();
+                $model->gambar->saveAs(Yii::app()->basePath . '/../images/' . $model->getPrimaryKey() . '.jpg');
+                $image = Yii::app()->image->load(Yii::app()->basePath . '/../images/' . $model->getPrimaryKey() . '.jpg');
+                $image = new Image('images/' . $model->getPrimaryKey() . '.jpg');
+                $t = $image->width / 1.2;
+                $l = $image->width;
+                if (($image->height * 1.2) < $image->width) {
+                    $t = $image->height;
+                    $l = $image->height * 1.2;
+                }
+                $image->crop($l, $t);
+                $image->resize(432, 360);
+                $image->save(Yii::app()->basePath . '/../images/' . $model->getPrimaryKey() . 's.jpg');
+
+                $this->redirect(array('view', 'id' => $model->id));
             }
-            
-            
         }
 
         $this->render('create', array(
@@ -97,8 +95,11 @@ class BarangController extends Controller {
 
         if (isset($_POST['Barang'])) {
             $model->attributes = $_POST['Barang'];
-            if ($model->save())
-                $this->redirect(array('view', 'id' => $model->id));
+
+            if ($model->validate()) {
+                $model->save();
+                $this->redirect(array('update', 'id' => $model->id));
+            }
         }
 
         $this->render('update', array(
@@ -169,8 +170,8 @@ class BarangController extends Controller {
             Yii::app()->end();
         }
     }
-    
-    public function actionKategori($id){
+
+    public function actionKategori($id) {
         $criteria = new CDbCriteria;
         $criteria->compare('kategori_id', $id);
         $dataProvider = new CActiveDataProvider('Barang');
@@ -181,8 +182,8 @@ class BarangController extends Controller {
             'dataProvider' => $dataProvider,
         ));
     }
-    
-    public function actionCari($key){
+
+    public function actionCari($key) {
         $criteria = new CDbCriteria;
         $criteria->addCondition('nama LIKE "%' . $key . '%"');
         $dataProvider = new CActiveDataProvider('Barang');
@@ -192,6 +193,29 @@ class BarangController extends Controller {
         $this->render('index', array(
             'dataProvider' => $dataProvider,
         ));
+    }
+
+    public function actionUpdateGambar($id) {
+        $model = $this->loadModel($id);
+        if (isset($_POST['Barang']['gambar'])) {
+            $model->gambar = CUploadedFile::getInstance($model, 'gambar');
+            if ($model->validate()) {
+                $model->gambar->saveAs(Yii::app()->basePath . '/../images/' . $model->getPrimaryKey() . '.jpg');
+                $image = Yii::app()->image->load(Yii::app()->basePath . '/../images/' . $model->getPrimaryKey() . '.jpg');
+                $image = new Image('images/' . $model->getPrimaryKey() . '.jpg');
+                $t = $image->width / 1.2;
+                $l = $image->width;
+                if (($image->height * 1.2) < $image->width) {
+                    $t = $image->height;
+                    $l = $image->height * 1.2;
+                }
+                $image->crop($l, $t);
+                $image->resize(432, 360);
+                $image->save(Yii::app()->basePath . '/../images/' . $model->getPrimaryKey() . 's.jpg');
+            }
+        }
+
+        $this->redirect(array('update', 'id' => $model->id));
     }
 
 }

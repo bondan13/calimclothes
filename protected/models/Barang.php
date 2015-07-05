@@ -37,7 +37,7 @@ class Barang extends CActiveRecord {
             array('nama, berat, kategori_id, harga, s_stok, m_stok, l_stok, xl_stok, allsize_stok, deskripsi', 'required'),
             array('s_stok, m_stok, l_stok, xl_stok, allsize_stok, kategori_id', 'numerical', 'integerOnly' => true),
             array('berat', 'numerical'),
-            array('gambar', 'required', 'on' => 'create,update'),
+            array('gambar', 'required', 'on' => 'create,updategambar'),
             array('gambar', 'file', 'allowEmpty' => true, 'types' => 'jpg'),
             array('nama', 'length', 'max' => 100),
             array('harga', 'length', 'max' => 11),
@@ -107,6 +107,7 @@ class Barang extends CActiveRecord {
         $criteria->compare('xl_stok', $this->xl_stok);
         $criteria->compare('allsize_stok', $this->allsize_stok);
         $criteria->compare('kategori_id', $this->kategori_id);
+        $criteria->order = 'id DESC';
 
         return new CActiveDataProvider($this, array(
             'criteria' => $criteria,

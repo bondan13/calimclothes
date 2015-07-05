@@ -31,7 +31,7 @@ $cs->registerCssFile($baseUrl . '/bootstrap/css/bootstrap.css')
 
             <div id="header">
                 <a href="<?php echo Yii::app()->request->baseUrl; ?>">
-                    <img src="<?php echo Yii::app()->request->baseUrl; ?>/images/logo.png">
+                    <img src="<?php echo Yii::app()->request->baseUrl; ?>/image/logo.png">
                 </a>
 
             </div><!-- header -->

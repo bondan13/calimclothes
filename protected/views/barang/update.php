@@ -1,21 +1,7 @@
-<?php
-/* @var $this BarangController */
-/* @var $model Barang */
+<h3><?php echo $model->nama; ?></h3>
+<div class="col-lg-6">
+    <?php echo CHtml::image(Yii::app()->request->baseUrl . '/images/'.$model->id.'s.jpg', CHtml::encode($model->nama), array('width' => '100%')); ?>
+    <?php $this->renderPartial('_formimage', array('model'=>$model)); ?>
+</div>
 
-$this->breadcrumbs=array(
-	'Barangs'=>array('index'),
-	$model->id=>array('view','id'=>$model->id),
-	'Update',
-);
-
-$this->menu=array(
-	array('label'=>'List Barang', 'url'=>array('index')),
-	array('label'=>'Create Barang', 'url'=>array('create')),
-	array('label'=>'View Barang', 'url'=>array('view', 'id'=>$model->id)),
-	array('label'=>'Manage Barang', 'url'=>array('admin')),
-);
-?>
-
-<h1>Update Barang <?php echo $model->id; ?></h1>
-
-<?php $this->renderPartial('_form', array('model'=>$model)); ?>
+<?php $this->renderPartial('_formUpdate', array('model'=>$model)); ?>

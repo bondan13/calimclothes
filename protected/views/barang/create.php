@@ -1,18 +1,5 @@
-<?php
-/* @var $this BarangController */
-/* @var $model Barang */
 
-$this->breadcrumbs=array(
-	'Barangs'=>array('index'),
-	'Create',
-);
 
-$this->menu=array(
-	array('label'=>'List Barang', 'url'=>array('index')),
-	array('label'=>'Manage Barang', 'url'=>array('admin')),
-);
-?>
-
-<h1>Create Barang</h1>
+<h3>Form Barang</h3>
 
 <?php $this->renderPartial('_form', array('model'=>$model)); ?>

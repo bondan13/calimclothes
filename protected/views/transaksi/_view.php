@@ -8,13 +8,11 @@
 	<?php echo CHtml::encode($data->invoice_id); ?>
 	<br />
 
-	<b><?php echo CHtml::encode($data->getAttributeLabel('barang_id')); ?>:</b>
-	<?php echo CHtml::encode($data->barang->nama); ?>
+	<b><?php echo CHtml::encode($data->barang->nama); ?></b>
 	<br />
 
 	<b><?php echo CHtml::encode($data->getAttributeLabel('jumlah')); ?>:</b>
 	<?php echo CHtml::encode($data->jumlah); ?>
-	<br />
 
 
 	<b>Harga</b>

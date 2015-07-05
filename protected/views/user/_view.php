@@ -13,20 +13,17 @@
 	<?php echo CHtml::encode($data->hp); ?>
 	<br />
 
-	<b><?php echo CHtml::encode($data->getAttributeLabel('password')); ?>:</b>
-	<?php echo CHtml::encode($data->password); ?>
-	<br />
 
 	<b><?php echo CHtml::encode($data->getAttributeLabel('nama')); ?>:</b>
 	<?php echo CHtml::encode($data->nama); ?>
 	<br />
 
-	<b><?php echo CHtml::encode($data->getAttributeLabel('wilayah_id')); ?>:</b>
-	<?php echo CHtml::encode($data->wilayah_id); ?>
-	<br />
-
 	<b><?php echo CHtml::encode($data->getAttributeLabel('alamat')); ?>:</b>
 	<?php echo CHtml::encode($data->alamat); ?>
+	<br />
+        
+        <b>Kota / Kabupaten</b>
+	<?php echo CHtml::encode($data->wilayah->kota_kabupaten); ?>
 	<br />
 
 	<b><?php echo CHtml::encode($data->getAttributeLabel('level')); ?>:</b>

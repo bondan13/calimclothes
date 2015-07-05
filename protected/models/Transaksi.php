@@ -21,6 +21,8 @@ class Transaksi extends CActiveRecord {
 
     public $jumlahitem;
     public $ukuran;
+    public $usernama;
+    public $barangnama;
     /**
      * @return string the associated database table name
      */
@@ -42,6 +44,7 @@ class Transaksi extends CActiveRecord {
             array('berat', 'numerical'),
             array('total_harga', 'length', 'max' => 11),
             array('resi', 'length', 'max' => 45),
+            array('usernama,barangnama', 'length', 'max'=>100),
             array('tanggal_bayar, tanggal_kirim', 'safe'),
             // The following rule is used by search().
             // @todo Please remove those attributes that should not be searched.
@@ -68,8 +71,8 @@ class Transaksi extends CActiveRecord {
         return array(
             'id' => 'ID',
             'invoice_id' => 'NO Invoice',
-            'user_id' => 'User',
-            'barang_id' => 'Barang',
+            'user_id' => 'User ID',
+            'barang_id' => 'Barang ID',
             'jumlah' => 'Jumlah',
             'berat' => 'Berat',
             'total_harga' => 'Total Harga',
@@ -78,6 +81,8 @@ class Transaksi extends CActiveRecord {
             'tanggal_kirim' => 'Tanggal Kirim',
             'tanggal' => 'Tanggal',
             'resi' => 'Resi',
+            'usernama' => 'User',
+            'barangnama'=> 'Barang',
         );
     }
 
@@ -97,8 +102,8 @@ class Transaksi extends CActiveRecord {
         // @todo Please modify the following code to remove attributes that should not be searched.
 
         $criteria = new CDbCriteria;
-
-        $criteria->compare('id', $this->id);
+        $criteria->with= array('user','barang'); 
+        $criteria->compare('t.id', $this->id,true);
         $criteria->compare('invoice_id', $this->invoice_id);
         $criteria->compare('user_id', $this->user_id);
         $criteria->compare('barang_id', $this->barang_id);
@@ -110,6 +115,9 @@ class Transaksi extends CActiveRecord {
         $criteria->compare('tanggal_kirim', $this->tanggal_kirim, true);
         $criteria->compare('tanggal', $this->tanggal, true);
         $criteria->compare('resi', $this->resi, true);
+        $criteria->compare('user.nama', $this->usernama, true);
+        $criteria->compare('barang.nama', $this->barangnama, true);
+        $criteria->order = 't.id DESC';
 
         return new CActiveDataProvider($this, array(
             'criteria' => $criteria,

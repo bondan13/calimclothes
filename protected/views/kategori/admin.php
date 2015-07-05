@@ -1,54 +1,53 @@
+<div class="row clearfix">
+    <div class="col-lg-6">
+    <h3>Katagori</h3>
+    </div>
+    <div class="col-lg-6">
+        <div class="navbar navbar-right">
+            <?php echo CHtml::link('Tambah Katagori Baru <i class="glyphicon glyphicon-plus-sign"></i>','create',array('class'=>'btn btn-success')); ?>
+        </div>
+    </div>
+</div>
+
 <?php
-/* @var $this KategoriController */
-/* @var $model Kategori */
-
-$this->breadcrumbs=array(
-	'Kategoris'=>array('index'),
-	'Manage',
-);
-
-$this->menu=array(
-	array('label'=>'List Kategori', 'url'=>array('index')),
-	array('label'=>'Create Kategori', 'url'=>array('create')),
-);
-
-Yii::app()->clientScript->registerScript('search', "
-$('.search-button').click(function(){
-	$('.search-form').toggle();
-	return false;
-});
-$('.search-form form').submit(function(){
-	$('#kategori-grid').yiiGridView('update', {
-		data: $(this).serialize()
-	});
-	return false;
-});
-");
+$this->widget('zii.widgets.grid.CGridView', array(
+    'id' => 'kategori-grid',
+    'dataProvider' => $model->search(),
+    'filter' => $model,
+    'columns' => array(
+        array(
+            'name' => 'ID',
+            'value' => '$data->id',
+            'filter' => CHtml::activeTextField($model, 'id'),
+            'sortable' => true,
+            'htmlOptions' => array(
+                'style' => 'width: 50px;'
+            )
+        ),
+        array(
+            'name' => 'nama',
+            'value' => '$data->nama',
+            'filter' => CHtml::activeTextField($model, 'nama'),
+            'sortable' => true,
+            'htmlOptions' => array(
+                'style' => 'width: 730px;'
+            )
+        ),
+        array
+            (
+            'class' => 'CButtonColumn',
+            'template' => '{edit}',
+            'buttons' => array
+                (
+                'edit' => array
+                    (
+                    'options' => array('rel' => 'tooltip', 'data-toggle' => 'tooltip', 'title' => Yii::t('app', 'Edit')),
+                    'label' => '<i class="glyphicon glyphicon-edit"></i>',
+                    'imageUrl' => false,
+                    'url' => 'Yii::app()->createUrl("kategori/update", array("id"=>$data->id))',
+                ),
+            ),
+        ),
+    ),
+));
 ?>
-
-<h1>Manage Kategoris</h1>
-
-<p>
-You may optionally enter a comparison operator (<b>&lt;</b>, <b>&lt;=</b>, <b>&gt;</b>, <b>&gt;=</b>, <b>&lt;&gt;</b>
-or <b>=</b>) at the beginning of each of your search values to specify how the comparison should be done.
-</p>
-
-<?php echo CHtml::link('Advanced Search','#',array('class'=>'search-button')); ?>
-<div class="search-form" style="display:none">
-<?php $this->renderPartial('_search',array(
-	'model'=>$model,
-)); ?>
-</div><!-- search-form -->
-
-<?php $this->widget('zii.widgets.grid.CGridView', array(
-	'id'=>'kategori-grid',
-	'dataProvider'=>$model->search(),
-	'filter'=>$model,
-	'columns'=>array(
-		'id',
-		'nama',
-		array(
-			'class'=>'CButtonColumn',
-		),
-	),
-)); ?>

@@ -55,7 +55,8 @@ class User extends CActiveRecord {
         // NOTE: you may need to adjust the relation name and the related
         // class name for the relations automatically generated below.
         return array(
-            'wilayah'=>array(self::BELONGS_TO, 'JneTangerang', 'wilayah_id')
+            'wilayah'=>array(self::BELONGS_TO, 'JneTangerang', 'wilayah_id'),
+            'alltransaksi'=>array(self::STAT,'Transaksi','user_id'),
         );
     }
 
@@ -72,7 +73,7 @@ class User extends CActiveRecord {
             'alamat' => 'Alamat',
             'level' => 'Level',
             'kota' => 'Kota / Kabupaten',
-            'kecamatan' => 'Kecamatan'
+            'kecamatan' => 'Kecamatan',
         );
     }
 
@@ -100,6 +101,8 @@ class User extends CActiveRecord {
         $criteria->compare('wilayah_id', $this->wilayah_id, true);
         $criteria->compare('alamat', $this->alamat, true);
         $criteria->compare('level', $this->level, true);
+        $criteria->order = 'id DESC';
+
 
         return new CActiveDataProvider($this, array(
             'criteria' => $criteria,
