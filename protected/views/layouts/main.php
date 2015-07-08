@@ -46,7 +46,7 @@ $cs->registerCssFile($baseUrl . '/bootstrap/css/bootstrap.css')
                         </div>
                     </form>
                 </div>
-                <div class="col-lg-6">
+                <div class="col-lg-6" style="padding-left: 0px;">
                     <div class="navbar-right">
                         <a href="<?php echo Yii::app()->request->baseUrl; ?>" class="btn btn-default">HOME</a>
                         <a href="<?php echo Yii::app()->createUrl('barang/kategori', array('id' => 8)); ?>" class="btn btn-default">KAOS</a>
@@ -74,7 +74,7 @@ $cs->registerCssFile($baseUrl . '/bootstrap/css/bootstrap.css')
 
                 <div class="clear"></div>
                 <div id="footer">
-                    Copyright &copy; <?php echo date('Y'); ?> by Buntut Kasiran.<br/>
+                    Copyright &copy; <?php echo date('Y'); ?> by Calim Clothes.<br/>
                     All Rights Reserved.<br/>
                 </div><!-- footer -->
             </div>
