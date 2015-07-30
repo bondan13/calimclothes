@@ -55,7 +55,8 @@ $cs->registerCssFile($baseUrl . '/bootstrap/css/bootstrap.css')
                         <a href="<?php echo Yii::app()->createUrl('barang/kategori', array('id' => 6)); ?>" class="btn btn-default">TAS</a>
                         <a href="<?php echo Yii::app()->createUrl('barang/kategori', array('id' => 7)); ?>" class="btn btn-default">AKSESORIS</a>
                         <?php if (!Yii::app()->user->isGuest) { ?>
-                            <a href="<?php echo Yii::app()->createUrl('transaksi'); ?>" class="btn btn-default"><i class="glyphicon glyphicon-shopping-cart"></i><sup><?php echo Transaksi::model()->countByAttributes(array('status'=>'pesan','user_id'=>Yii::app()->user->id)); ?></sup></a>
+                            <a href="<?php echo Yii::app()->createUrl('transaksi'); ?>"  class="btn btn-default"><i class="glyphicon glyphicon-shopping-cart"></i><sup><?php echo Transaksi::model()->countByAttributes(array('status'=>'pesan','user_id'=>Yii::app()->user->id)); ?></sup></a>
+                            <a href="<?php echo Yii::app()->createUrl('site/logout'); ?>" type="button" class="btn btn-default" data-toggle="tooltip" data-placement="top" title="Logout"><i class="glyphicon glyphicon-log-out"></i></a>
                         <?php } ?>
                         <?php if (Yii::app()->user->isGuest) { ?>
                             <a id="modal-788569" data-toggle="modal" href="#modal-container-788569" class="btn btn-default"><i class="glyphicon glyphicon-user"></i> LOGIN</a>
