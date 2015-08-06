@@ -5899,3 +5899,20 @@ Stack trace:
 REQUEST_URI=/calimclothes/index.php/transaksi/deletea/25
 in D:\www\calimclothes\protected\controllers\TransaksiController.php (107)
 in D:\www\calimclothes\index.php (13)
+2015/08/03 05:14:02 [error] [php] Missing argument 1 for CActiveDataProvider::__construct(), called in D:\www\calimclothes\protected\controllers\TransaksiController.php on line 380 and defined (D:\www\yii\framework\web\CActiveDataProvider.php:82)
+Stack trace:
+#0 D:\www\yii\framework\web\CController.php(308): CInlineAction->runWithParams()
+#1 D:\www\yii\framework\web\filters\CFilterChain.php(133): TransaksiController->runAction()
+#2 D:\www\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#3 D:\www\yii\framework\web\CController.php(1145): CAccessControlFilter->filter()
+#4 D:\www\yii\framework\web\filters\CInlineFilter.php(58): TransaksiController->filterAccessControl()
+#5 D:\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter()
+#6 D:\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#7 D:\www\yii\framework\web\CController.php(265): TransaksiController->runActionWithFilters()
+#8 D:\www\yii\framework\web\CWebApplication.php(282): TransaksiController->run()
+#9 D:\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#10 D:\www\yii\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#11 D:\www\calimclothes\index.php(13): CWebApplication->run()
+REQUEST_URI=/calimclothes/index.php/transaksi/report
+in D:\www\calimclothes\protected\controllers\TransaksiController.php (380)
+in D:\www\calimclothes\index.php (13)

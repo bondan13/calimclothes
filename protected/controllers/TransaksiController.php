@@ -26,7 +26,7 @@ class TransaksiController extends Controller {
     public function accessRules() {
         return array(
             array('allow', // allow all users to perform 'index' and 'view' actions
-                'actions' => array('index', 'view', 'create', 'update', 'deletea', 'admin', 'order', 'invoice', 'adminupd'),
+                'actions' => array('index', 'view', 'create', 'update', 'deletea', 'admin', 'order', 'invoice', 'adminupd', 'report'),
                 'users' => array('@'),
             ),
             array('deny', // deny all users
@@ -316,7 +316,7 @@ class TransaksiController extends Controller {
             'invoice' => $invoice, 'dataprovider' => $model,
             'totalitem' => $command->queryScalar(),
             'totalharga' => $totalharga,
-            'totalberat' => $berat,
+            'totalberat' => number_format($berat,1),
             'totalongkir' => $this->hargaRupiah($totalongkir),
             'total' => $this->hargaRupiah($total),
             'user' => $user,
@@ -374,6 +374,15 @@ class TransaksiController extends Controller {
             );
         }
         $this->redirect(array('transaksi/invoice', 'id' => $invoice->invoice_id));
+    }
+    
+    public function actionReport(){
+        $criteria = new CDbCriteria;
+        $criteria->addBetweenCondition('tanggal', $_POST['date_start'], $_POST['date_end']);
+        $criteria->distinct = true;
+        $criteria->group = 'barang_id';
+        $data = Transaksi::model()->findAll($criteria);
+        $this->renderPArtial('_report',array('data'=>$data));
     }
 
 }
