@@ -23,6 +23,12 @@ class Transaksi extends CActiveRecord {
     public $ukuran;
     public $usernama;
     public $barangnama;
+    public $countS; 
+    public $countM; 
+    public $countL; 
+    public $countXL;
+    public $countAllSize; 
+    
     /**
      * @return string the associated database table name
      */

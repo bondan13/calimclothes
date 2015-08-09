@@ -377,12 +377,48 @@ class TransaksiController extends Controller {
     }
     
     public function actionReport(){
-        $criteria = new CDbCriteria;
-        $criteria->addBetweenCondition('tanggal', $_POST['date_start'], $_POST['date_end']);
-        $criteria->distinct = true;
-        $criteria->group = 'barang_id';
-        $data = Transaksi::model()->findAll($criteria);
-        $this->renderPArtial('_report',array('data'=>$data));
+        if(Yii::app()->user->getState('level')!='admin'){
+            $this->redirect(array('/'));
+            Yii::app()->end();
+        }
+        if (isset($_POST['Report']['date_start']) && isset($_POST['Report']['date_end']) && $_POST['Report']['date_start']!='' && $_POST['Report']['date_end']!=''){
+            $criteria = new CDbCriteria();
+            $criteria->addBetweenCondition('tanggal',$_POST['Report']['date_start'],$_POST['Report']['date_end']);
+            $criteria->compare('status', 5);
+            $criteria->distinct = true ;
+            $criteria->group = 'barang_id';
+            $transaksi = Transaksi::model()->findAll($criteria);
+            $judul = 'Laporan Penjualan';
+            $header = array (
+                array('label'=>'ID','length'=>'10','align'=>'C'),
+                array('label'=>'Nama','length'=>'110','align'=>'C'),
+                array('label'=>'S','length'=>'10','align'=>'C'),
+                array('label'=>'M','length'=>'10','align'=>'C'),
+                array('label'=>'L','length'=>'10','align'=>'C'),
+                array('label'=>'XL','length'=>'10','align'=>'C'),
+                array('label'=>'All Size','length'=>'15','align'=>'C'),
+                 array('label'=>'Total','length'=>'15','align'=>'C'),
+            );
+            if($transaksi){
+                $dataProvider = new CActiveDataProvider('Transaksi');
+                $dataProvider->criteria = $criteria;
+                $dataProvider->sort->defaultOrder = 'id DESC';
+                $this->renderPartial('laporanpenjualan', array(
+                    'dataProvider' => $dataProvider,
+                    'date' => $_POST,
+                    'transaksi'=>$transaksi,
+                    'judul'=>$judul,
+                    'header'=>$header,
+                ));
+            }
+            else{
+                Yii::app()->user->setFlash('gagal', "Transaksi tidak ditemukan");
+                $this->render('report');
+            }           
+        }
+        else{
+            $this->render('report');
+        }
     }
 
 }
