@@ -15,7 +15,7 @@
             <a href="<?php echo Yii::app()->createUrl('barang/admin'); ?>" class="btn btn-default btn-block"><i class="glyphicon glyphicon-briefcase"></i> &nbsp; ALL BARANG </a>
             <a href="<?php echo Yii::app()->createUrl('kategori/admin'); ?>" class="btn btn-default btn-block"><i class="glyphicon glyphicon-random"></i> &nbsp; ALL KATEGORI </a>
             <a href="<?php echo Yii::app()->createUrl('transaksi/admin'); ?>" class="btn btn-default btn-block"><i class="glyphicon glyphicon-shopping-cart"></i> &nbsp; ALL TRANSAKSI</a>
-            <a href="<?php echo Yii::app()->createUrl('transaksi/report'); ?>" class="btn btn-default btn-block"><i class="glyphicon glyphicon-book"></i> &nbsp; LAPORAN</a>
+            <a href="<?php echo Yii::app()->createUrl('transaksi/laporan'); ?>" class="btn btn-default btn-block"><i class="glyphicon glyphicon-book"></i> &nbsp; LAPORAN</a>
             <?php } 
             else { ?>
             

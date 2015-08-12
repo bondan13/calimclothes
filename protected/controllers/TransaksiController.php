@@ -26,7 +26,7 @@ class TransaksiController extends Controller {
     public function accessRules() {
         return array(
             array('allow', // allow all users to perform 'index' and 'view' actions
-                'actions' => array('index', 'view', 'create', 'update', 'deletea', 'admin', 'order', 'invoice', 'adminupd', 'report'),
+                'actions' => array('index', 'view', 'create', 'update', 'deletea', 'admin', 'order', 'invoice', 'adminupd', 'report', 'laporan'),
                 'users' => array('@'),
             ),
             array('deny', // deny all users
@@ -419,6 +419,48 @@ class TransaksiController extends Controller {
         else{
             $this->render('report');
         }
+    }
+    
+    public function actionLaporan(){
+        if(Yii::app()->user->getState('level')!='admin'){
+            $this->redirect(array('/'));
+            Yii::app()->end();
+        }
+        
+        if (isset($_POST['Report']['date_start']) && isset($_POST['Report']['date_end']) && $_POST['Report']['date_start']!='' && $_POST['Report']['date_end']!=''){
+            $criteria = new CDbCriteria();
+            $criteria->addBetweenCondition('tanggal',$_POST['Report']['date_start'],$_POST['Report']['date_end']);
+            $criteria->compare('status', 5);
+            $criteria->with = array('user','barang');
+            $transaksi = Transaksi::model()->findAll($criteria);
+            $judul = 'Laporan Penjualan';
+            $header = array (
+                array('label'=>'NO','length'=>'10','align'=>'C'),
+                array('label'=>'Nama','length'=>'30','align'=>'C'),
+                array('label'=>'Invoice ID','length'=>'20','align'=>'C'),
+                array('label'=>'Tgl Transaksi','length'=>'23','align'=>'C'),
+                array('label'=>'Nama Barang','length'=>'50','align'=>'C'),
+                array('label'=>'QTY','length'=>'10','align'=>'C'),
+                array('label'=>'Harga Satuan','length'=>'25','align'=>'C'),
+                array('label'=>'Sub Total','length'=>'25','align'=>'C'),
+            );
+            
+            if($transaksi){
+                $this->renderPartial('_laporanpenjualan', array(
+                    'date' => $_POST,
+                    'transaksi'=>$transaksi,
+                    'judul'=>$judul,
+                    'header'=>$header,
+                ));
+            }
+            else{
+                Yii::app()->user->setFlash('gagal', "Transaksi tidak ditemukan");
+                $this->render('laporan');
+            }           
+        }
+        
+        $this->render('laporan');
+        
     }
 
 }
