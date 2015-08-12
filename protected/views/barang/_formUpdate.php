@@ -81,6 +81,12 @@
         <?php echo $form->dropDownList($model, 'kategori_id', CHtml::listData(Kategori::model()->findAll(), 'id', 'nama'), array('class' => 'form-control')); ?>
         <?php echo $form->error($model, 'kategori_id'); ?>
     </div>
+    
+    <div class="row">
+        <?php echo $form->labelEx($model, 'status'); ?>
+        <?php echo $form->dropDownList($model, 'status', array('0'=>'Not Active','1'=>'Active'), array('class' => 'form-control')); ?>
+        <?php echo $form->error($model, 'status'); ?>
+    </div>
 
     <div class="row buttons">
         <?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save', array('class'=>'btn btn-success')); ?>

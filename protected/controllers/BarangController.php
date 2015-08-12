@@ -40,9 +40,14 @@ class BarangController extends Controller {
      * @param integer $id the ID of the model to be displayed
      */
     public function actionView($id) {
+        $model = $this->loadModel($id);
+        if(Yii::app()->user->getState('level')!='admin' || $model->status != 1){
+            $this->redirect(array('/'));
+            Yii::app()->end();
+        }
         $this->layout = '//layouts/column1';
         $this->render('view', array(
-            'model' => $this->loadModel($id),
+            'model' => $model,
         ));
     }
 
@@ -124,7 +129,10 @@ class BarangController extends Controller {
      * Lists all models.
      */
     public function actionIndex() {
+        $criteria = new CDbCriteria;
+        $criteria->compare('status',1);
         $dataProvider = new CActiveDataProvider('Barang');
+        $dataProvider->criteria = $criteria;
         $dataProvider->pagination->pageSize = 12;
         $dataProvider->sort->defaultOrder = 'id DESC';
         $this->render('index', array(
@@ -185,6 +193,7 @@ class BarangController extends Controller {
 
     public function actionCari($key) {
         $criteria = new CDbCriteria;
+        $criteria->compare('status',1);
         $criteria->addCondition('nama LIKE "%' . $key . '%"');
         $dataProvider = new CActiveDataProvider('Barang');
         $dataProvider->criteria = $criteria;

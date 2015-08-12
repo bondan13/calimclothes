@@ -35,7 +35,7 @@ class Barang extends CActiveRecord {
         // will receive user inputs.
         return array(
             array('nama, berat, kategori_id, harga, s_stok, m_stok, l_stok, xl_stok, allsize_stok, deskripsi', 'required'),
-            array('s_stok, m_stok, l_stok, xl_stok, allsize_stok, kategori_id', 'numerical', 'integerOnly' => true),
+            array('status, s_stok, m_stok, l_stok, xl_stok, allsize_stok, kategori_id', 'numerical', 'integerOnly' => true),
             array('berat', 'numerical'),
             array('gambar', 'required', 'on' => 'create,updategambar'),
             array('gambar', 'file', 'allowEmpty' => true, 'types' => 'jpg'),
@@ -76,6 +76,7 @@ class Barang extends CActiveRecord {
             'allsize_stok' => 'Allsize Stok',
             'kategori_id' => 'Kategori',
             'gambar' => 'gambar',
+            'status' => 'Status',
         );
     }
 

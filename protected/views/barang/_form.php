@@ -79,6 +79,12 @@
     </div>
     
     <div class="row">
+        <?php echo $form->labelEx($model, 'status'); ?>
+        <?php echo $form->dropDownList($model, 'status', array('0'=>'Not Active','1'=>'Active'), array('class' => 'form-control')); ?>
+        <?php echo $form->error($model, 'status'); ?>
+    </div>
+    
+    <div class="row">
         <?php echo $form->fileField($model, 'gambar', array('class'=>'btn btn-default')); ?>
     </div>
 
