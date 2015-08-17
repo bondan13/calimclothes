@@ -6777,3 +6777,61 @@ REQUEST_URI=/calimclothes/index.php/transaksi/laporan
 in D:\www\calimclothes\protected\views\transaksi\_laporanpenjualan.php (8)
 in D:\www\calimclothes\protected\controllers\TransaksiController.php (454)
 in D:\www\calimclothes\index.php (13)
+2015/08/17 17:46:59 [error] [system.db.CDbCommand] CDbCommand::fetchAll() failed: SQLSTATE[23000]: Integrity constraint violation: 1052 Column 'status' in where clause is ambiguous. The SQL statement executed was: SELECT `t`.`id` AS `t0_c0`, `t`.`invoice_id` AS `t0_c1`, `t`.`user_id` AS `t0_c2`, `t`.`barang_id` AS `t0_c3`, `t`.`jumlah` AS `t0_c4`, `t`.`berat` AS `t0_c5`, `t`.`total_harga` AS `t0_c6`, `t`.`status` AS `t0_c7`, `t`.`tanggal_bayar` AS `t0_c8`, `t`.`tanggal_kirim` AS `t0_c9`, `t`.`tanggal` AS `t0_c10`, `t`.`resi` AS `t0_c11`, `t`.`size` AS `t0_c12`, `t`.`keterangan` AS `t0_c13`, `user`.`id` AS `t1_c0`, `user`.`hp` AS `t1_c1`, `user`.`password` AS `t1_c2`, `user`.`nama` AS `t1_c3`, `user`.`wilayah_id` AS `t1_c4`, `user`.`alamat` AS `t1_c5`, `user`.`level` AS `t1_c6`, `barang`.`id` AS `t2_c0`, `barang`.`nama` AS `t2_c1`, `barang`.`deskripsi` AS `t2_c2`, `barang`.`harga` AS `t2_c3`, `barang`.`berat` AS `t2_c4`, `barang`.`s_stok` AS `t2_c5`, `barang`.`m_stok` AS `t2_c6`, `barang`.`l_stok` AS `t2_c7`, `barang`.`xl_stok` AS `t2_c8`, `barang`.`allsize_stok` AS `t2_c9`, `barang`.`kategori_id` AS `t2_c10`, `barang`.`gambar` AS `t2_c11`, `barang`.`status` AS `t2_c12` FROM `transaksi` `t`  LEFT OUTER JOIN `user` `user` ON (`t`.`user_id`=`user`.`id`) LEFT OUTER JOIN `barang` `barang` ON (`t`.`barang_id`=`barang`.`id`) WHERE ((tanggal BETWEEN :ycp0 AND :ycp1) AND (status=:ycp2)).
+in D:\www\calimclothes\protected\controllers\TransaksiController.php (435)
+in D:\www\calimclothes\index.php (13)
+2015/08/17 17:46:59 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand failed to execute the SQL statement: SQLSTATE[23000]: Integrity constraint violation: 1052 Column 'status' in where clause is ambiguous. The SQL statement executed was: SELECT `t`.`id` AS `t0_c0`, `t`.`invoice_id` AS `t0_c1`, `t`.`user_id` AS `t0_c2`, `t`.`barang_id` AS `t0_c3`, `t`.`jumlah` AS `t0_c4`, `t`.`berat` AS `t0_c5`, `t`.`total_harga` AS `t0_c6`, `t`.`status` AS `t0_c7`, `t`.`tanggal_bayar` AS `t0_c8`, `t`.`tanggal_kirim` AS `t0_c9`, `t`.`tanggal` AS `t0_c10`, `t`.`resi` AS `t0_c11`, `t`.`size` AS `t0_c12`, `t`.`keterangan` AS `t0_c13`, `user`.`id` AS `t1_c0`, `user`.`hp` AS `t1_c1`, `user`.`password` AS `t1_c2`, `user`.`nama` AS `t1_c3`, `user`.`wilayah_id` AS `t1_c4`, `user`.`alamat` AS `t1_c5`, `user`.`level` AS `t1_c6`, `barang`.`id` AS `t2_c0`, `barang`.`nama` AS `t2_c1`, `barang`.`deskripsi` AS `t2_c2`, `barang`.`harga` AS `t2_c3`, `barang`.`berat` AS `t2_c4`, `barang`.`s_stok` AS `t2_c5`, `barang`.`m_stok` AS `t2_c6`, `barang`.`l_stok` AS `t2_c7`, `barang`.`xl_stok` AS `t2_c8`, `barang`.`allsize_stok` AS `t2_c9`, `barang`.`kategori_id` AS `t2_c10`, `barang`.`gambar` AS `t2_c11`, `barang`.`status` AS `t2_c12` FROM `transaksi` `t`  LEFT OUTER JOIN `user` `user` ON (`t`.`user_id`=`user`.`id`) LEFT OUTER JOIN `barang` `barang` ON (`t`.`barang_id`=`barang`.`id`) WHERE ((tanggal BETWEEN :ycp0 AND :ycp1) AND (status=:ycp2))' in D:\www\yii\framework\db\CDbCommand.php:543
+Stack trace:
+#0 D:\www\yii\framework\db\CDbCommand.php(396): CDbCommand->queryInternal('fetchAll', Array, Array)
+#1 D:\www\yii\framework\db\ar\CActiveFinder.php(808): CDbCommand->queryAll()
+#2 D:\www\yii\framework\db\ar\CActiveFinder.php(440): CJoinElement->runQuery(Object(CJoinQuery))
+#3 D:\www\yii\framework\db\ar\CActiveFinder.php(68): CJoinElement->find(Object(CDbCriteria))
+#4 D:\www\yii\framework\db\ar\CActiveRecord.php(1361): CActiveFinder->query(Object(CDbCriteria), true)
+#5 D:\www\yii\framework\db\ar\CActiveRecord.php(1475): CActiveRecord->query(Object(CDbCriteria), true)
+#6 D:\www\calimclothes\protected\controllers\TransaksiController.php(435): CActiveRecord->findAll(Object(CDbCriteria))
+#7 D:\www\yii\framework\web\actions\CInlineAction.php(49): TransaksiController->actionLaporan()
+#8 D:\www\yii\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#9 D:\www\yii\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#10 D:\www\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#11 D:\www\yii\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#12 D:\www\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#13 D:\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#14 D:\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#15 D:\www\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#16 D:\www\yii\framework\web\CWebApplication.php(282): CController->run('laporan')
+#17 D:\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('transaksi/lapor...')
+#18 D:\www\yii\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#19 D:\www\calimclothes\index.php(13): CApplication->run()
+#20 {main}
+REQUEST_URI=/calimclothes/index.php/transaksi/laporan
+HTTP_REFERER=http://localhost/calimclothes/index.php/transaksi/laporan
+---
+2015/08/17 17:47:17 [error] [system.db.CDbCommand] CDbCommand::fetchAll() failed: SQLSTATE[23000]: Integrity constraint violation: 1052 Column 'status' in where clause is ambiguous. The SQL statement executed was: SELECT `t`.`id` AS `t0_c0`, `t`.`invoice_id` AS `t0_c1`, `t`.`user_id` AS `t0_c2`, `t`.`barang_id` AS `t0_c3`, `t`.`jumlah` AS `t0_c4`, `t`.`berat` AS `t0_c5`, `t`.`total_harga` AS `t0_c6`, `t`.`status` AS `t0_c7`, `t`.`tanggal_bayar` AS `t0_c8`, `t`.`tanggal_kirim` AS `t0_c9`, `t`.`tanggal` AS `t0_c10`, `t`.`resi` AS `t0_c11`, `t`.`size` AS `t0_c12`, `t`.`keterangan` AS `t0_c13`, `user`.`id` AS `t1_c0`, `user`.`hp` AS `t1_c1`, `user`.`password` AS `t1_c2`, `user`.`nama` AS `t1_c3`, `user`.`wilayah_id` AS `t1_c4`, `user`.`alamat` AS `t1_c5`, `user`.`level` AS `t1_c6`, `barang`.`id` AS `t2_c0`, `barang`.`nama` AS `t2_c1`, `barang`.`deskripsi` AS `t2_c2`, `barang`.`harga` AS `t2_c3`, `barang`.`berat` AS `t2_c4`, `barang`.`s_stok` AS `t2_c5`, `barang`.`m_stok` AS `t2_c6`, `barang`.`l_stok` AS `t2_c7`, `barang`.`xl_stok` AS `t2_c8`, `barang`.`allsize_stok` AS `t2_c9`, `barang`.`kategori_id` AS `t2_c10`, `barang`.`gambar` AS `t2_c11`, `barang`.`status` AS `t2_c12` FROM `transaksi` `t`  LEFT OUTER JOIN `user` `user` ON (`t`.`user_id`=`user`.`id`) LEFT OUTER JOIN `barang` `barang` ON (`t`.`barang_id`=`barang`.`id`) WHERE ((tanggal BETWEEN :ycp0 AND :ycp1) AND (status=:ycp2)).
+in D:\www\calimclothes\protected\controllers\TransaksiController.php (435)
+in D:\www\calimclothes\index.php (13)
+2015/08/17 17:47:17 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand failed to execute the SQL statement: SQLSTATE[23000]: Integrity constraint violation: 1052 Column 'status' in where clause is ambiguous. The SQL statement executed was: SELECT `t`.`id` AS `t0_c0`, `t`.`invoice_id` AS `t0_c1`, `t`.`user_id` AS `t0_c2`, `t`.`barang_id` AS `t0_c3`, `t`.`jumlah` AS `t0_c4`, `t`.`berat` AS `t0_c5`, `t`.`total_harga` AS `t0_c6`, `t`.`status` AS `t0_c7`, `t`.`tanggal_bayar` AS `t0_c8`, `t`.`tanggal_kirim` AS `t0_c9`, `t`.`tanggal` AS `t0_c10`, `t`.`resi` AS `t0_c11`, `t`.`size` AS `t0_c12`, `t`.`keterangan` AS `t0_c13`, `user`.`id` AS `t1_c0`, `user`.`hp` AS `t1_c1`, `user`.`password` AS `t1_c2`, `user`.`nama` AS `t1_c3`, `user`.`wilayah_id` AS `t1_c4`, `user`.`alamat` AS `t1_c5`, `user`.`level` AS `t1_c6`, `barang`.`id` AS `t2_c0`, `barang`.`nama` AS `t2_c1`, `barang`.`deskripsi` AS `t2_c2`, `barang`.`harga` AS `t2_c3`, `barang`.`berat` AS `t2_c4`, `barang`.`s_stok` AS `t2_c5`, `barang`.`m_stok` AS `t2_c6`, `barang`.`l_stok` AS `t2_c7`, `barang`.`xl_stok` AS `t2_c8`, `barang`.`allsize_stok` AS `t2_c9`, `barang`.`kategori_id` AS `t2_c10`, `barang`.`gambar` AS `t2_c11`, `barang`.`status` AS `t2_c12` FROM `transaksi` `t`  LEFT OUTER JOIN `user` `user` ON (`t`.`user_id`=`user`.`id`) LEFT OUTER JOIN `barang` `barang` ON (`t`.`barang_id`=`barang`.`id`) WHERE ((tanggal BETWEEN :ycp0 AND :ycp1) AND (status=:ycp2))' in D:\www\yii\framework\db\CDbCommand.php:543
+Stack trace:
+#0 D:\www\yii\framework\db\CDbCommand.php(396): CDbCommand->queryInternal('fetchAll', Array, Array)
+#1 D:\www\yii\framework\db\ar\CActiveFinder.php(808): CDbCommand->queryAll()
+#2 D:\www\yii\framework\db\ar\CActiveFinder.php(440): CJoinElement->runQuery(Object(CJoinQuery))
+#3 D:\www\yii\framework\db\ar\CActiveFinder.php(68): CJoinElement->find(Object(CDbCriteria))
+#4 D:\www\yii\framework\db\ar\CActiveRecord.php(1361): CActiveFinder->query(Object(CDbCriteria), true)
+#5 D:\www\yii\framework\db\ar\CActiveRecord.php(1475): CActiveRecord->query(Object(CDbCriteria), true)
+#6 D:\www\calimclothes\protected\controllers\TransaksiController.php(435): CActiveRecord->findAll(Object(CDbCriteria))
+#7 D:\www\yii\framework\web\actions\CInlineAction.php(49): TransaksiController->actionLaporan()
+#8 D:\www\yii\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#9 D:\www\yii\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#10 D:\www\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#11 D:\www\yii\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#12 D:\www\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#13 D:\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#14 D:\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#15 D:\www\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#16 D:\www\yii\framework\web\CWebApplication.php(282): CController->run('laporan')
+#17 D:\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('transaksi/lapor...')
+#18 D:\www\yii\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#19 D:\www\calimclothes\index.php(13): CApplication->run()
+#20 {main}
+REQUEST_URI=/calimclothes/index.php/transaksi/laporan
+HTTP_REFERER=http://localhost/calimclothes/index.php/transaksi/laporan
+---

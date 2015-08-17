@@ -429,8 +429,8 @@ class TransaksiController extends Controller {
         
         if (isset($_POST['Report']['date_start']) && isset($_POST['Report']['date_end']) && $_POST['Report']['date_start']!='' && $_POST['Report']['date_end']!=''){
             $criteria = new CDbCriteria();
-            $criteria->addBetweenCondition('tanggal',$_POST['Report']['date_start'],$_POST['Report']['date_end']);
-            $criteria->compare('status', 5);
+            $criteria->addBetweenCondition('t.tanggal',$_POST['Report']['date_start'],$_POST['Report']['date_end']);
+            $criteria->compare('t.status', 5);
             $criteria->with = array('user','barang');
             $transaksi = Transaksi::model()->findAll($criteria);
             $judul = 'Laporan Penjualan';
