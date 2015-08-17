@@ -90,8 +90,8 @@ $this->widget('zii.widgets.CListView', array(
         <?php } ?>
     </div>
     <div class="col-lg-3">
-        Transfer ke no rek BNI 2132312321<br>
-        AN Calim Clothes
+        Transfer ke no rek BNI 020 9101 741<br>
+        A/N Irzhan Dwi Anggoro
         <br /><br />
         <?php if (($invoice->status == 0 || $invoice->status == 3) && Yii::app()->user->getState('level') != 'admin') { ?>
             <form method="POST">

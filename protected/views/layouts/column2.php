@@ -46,18 +46,16 @@
         <div class="sidebar" style="color:#515151;">
         <h4 class="widget-title">Hubungi Kami</h4>
         <small>
-            Moose Believer
+            Calim Clothes
             <br />
-            Distribution Center & Store
-            Jl Perdana Blok I/11, Jaksel
-            Indonesia
+            Distribution Center & Store </br>
+            Jl Duta Raya Blok C 7, </br> Kota Tangerang - Indonesia
             <br /><br />
             Online Store<br />
-            Phone: 087888027573<br />
-            Whatsapp: 087771419430<br />
-            Blackberry: 79D7F738<br />
+            Phone/Whatsapp: 087775660921<br />
+            Blackberry: 7A690DCE<br />
             <br />
-            order@mooseblvr.com
+            order@calimclothes.com
         </small>
         </div>
         
