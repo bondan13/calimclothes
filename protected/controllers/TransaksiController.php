@@ -238,7 +238,7 @@ class TransaksiController extends Controller {
             $model->tanggal = new CDbExpression('NOW()');
             $model->status = 0;
             $model->save();
-            $transaksiBefore = Transaksi::model()->findByAttributes(array('user_id' => $model->user_id), 'status=0');
+            $transaksiBefore = Transaksi::model()->findByAttributes(array('user_id' => $model->user_id), 't.status=0');
             if ($transaksiBefore === null) {
                 $model->invoice_id = 'T' . $model->id;
             } else {

@@ -40,15 +40,22 @@ class BarangController extends Controller {
      * @param integer $id the ID of the model to be displayed
      */
     public function actionView($id) {
+        $this->layout = '//layouts/column1';
         $model = $this->loadModel($id);
-        if(Yii::app()->user->getState('level')!='admin' || $model->status != 1){
+        if($model->status == 1){
+            $this->render('view', array(
+            'model' => $model,
+            ));            
+        }
+        else if (Yii::app()->user->getState('level')=='admin'){
+            $this->render('view', array(
+            'model' => $model,
+            ));
+        }
+        else {
             $this->redirect(array('/'));
             Yii::app()->end();
-        }
-        $this->layout = '//layouts/column1';
-        $this->render('view', array(
-            'model' => $model,
-        ));
+        }  
     }
 
     /**
