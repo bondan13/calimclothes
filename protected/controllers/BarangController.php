@@ -26,7 +26,7 @@ class BarangController extends Controller {
     public function accessRules() {
         return array(
             array('allow', // allow all users to perform 'index' and 'view' actions
-                'actions' => array('index', 'view', 'create', 'update', 'admin', 'delete', 'kategori', 'cari', 'updategambar'),
+                'actions' => array('index', 'view', 'create', 'update', 'admin', 'delete', 'kategori', 'cari', 'updategambar','stock'),
                 'users' => array('*'),
             ),
             array('deny', // deny all users
@@ -227,4 +227,27 @@ class BarangController extends Controller {
         $this->redirect(array('update', 'id' => $model->id));
     }
 
+    public function actionStock(){
+        if(Yii::app()->user->getState('level')!='admin'){
+            $this->redirect(array('/'));
+            Yii::app()->end();
+        }
+        $judul = 'Laporan Stok Barang';
+            $header = array (
+                array('label'=>'NO','length'=>'10','align'=>'C'),
+                array('label'=>'Nama','length'=>'60','align'=>'C'),
+                array('label'=>'Size S','length'=>'20','align'=>'C'),
+                array('label'=>'Size M','length'=>'20','align'=>'C'),
+                array('label'=>'Size L','length'=>'20','align'=>'C'),
+                array('label'=>'Size XL','length'=>'20','align'=>'C'),
+                array('label'=>'All Size','length'=>'20','align'=>'C'),
+                array('label'=>'Total','length'=>'20','align'=>'C'),
+            );
+        $barang = Barang::model()->findAll();
+        $this->renderPartial('/transaksi/_laporanstock', array(
+            'barang' => $barang,
+            'judul' =>$judul,
+            'header' =>$header,
+        ));
+    }
 }

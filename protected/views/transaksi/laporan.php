@@ -1,4 +1,4 @@
-
+<div class="col-lg-6">
 
 <center><h3><i class="glyphicon glyphicon-book"></i> Laporan Penjualan</h3>
 
@@ -66,3 +66,14 @@
     </form>
 
 </center>
+</div>
+<div class="col-lg-6">
+
+<center><h3><i class="glyphicon glyphicon-book"></i> Laporan Stok Barang</h3>
+    <?php echo date("d M Y H:i:s"); ?>
+        <br />
+    <br />
+    <a href="<?php echo Yii::app()->createUrl('/barang/stock'); ?>" class="btn btn-success btn-sm">Lihat Laporan</a>
+
+</center>
+</div>
